@@ -33,7 +33,7 @@ entradaDados.question('Digite o número1: ', function(valor1){
                 resultado = numero1 + numero2;    
             } else if(operacao == 'SUBTRAIR' || operacao == '-') {
                 resultado = numero1 - numero2;
-            } else if(operacao == 'MULTIPLICAR' || operacao == '*' || operacao == 'X') {
+            } else if(operacao == 'MULTIPLICAR' || operacao == '*') {
                 resultado = numero1 * numero2;
             } else if(operacao == 'DIVIDIR' || operacao == '/') {
                 resultado = numero1 / numero2;
