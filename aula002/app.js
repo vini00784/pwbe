@@ -60,9 +60,11 @@ entradaDados.question('Digite o nome do aluno: ', function (nome) {
                     // Validação para o nome do aluno
                     if(nomeAluno == '') {
                         console.log('Nome do aluno deve ser informado!')
+                        entradaDados.close();
                     //Validação para as notas
                     } else if(nota1 == '' || nota2 == '' || nota3 == '' || nota4 == '') {
                         console.log('É necessário informar todas as notas para o cálculo!');
+                        entradaDados.close();
                     } else {
                         // Para converter as variáveis que estão em String para um número de fato, podemos utilizar o parseInt (converte para número inteiro) ou parseFloat (converte para números decimais, ou reais)
                         media = (parseFloat(nota1) + parseFloat(nota2) + parseFloat(nota3) + parseFloat(nota4)) / 4;
@@ -90,6 +92,9 @@ entradaDados.question('Digite o nome do aluno: ', function (nome) {
 
                     console.log('O aluno ['+ nomeAluno +'], teve media ' + media + \n Você está: ` + statusAluno);
                     */
+
+                    // Fecha o objeto entradaDados
+                    entradaDados.close();
                 });
             });
         });
