@@ -1,5 +1,6 @@
 console.log('Calculadora Simples\n');
 
+const { exit } = require('process');
 // Import da biblioteca da entrada de dados
 var readline = require('readline');
 
@@ -30,6 +31,7 @@ entradaDados.question('Digite o número1: ', function(valor1){
             let resultado;
             let erro = false;
 
+            /*
             if(operacao == 'SOMAR' || operacao == '+') {
                 resultado = numero1 + numero2;    
             } else if(operacao == 'SUBTRAIR' || operacao == '-') {
@@ -42,9 +44,34 @@ entradaDados.question('Digite o número1: ', function(valor1){
                 resultado = 'ERRO: Não foi escolhida uma operação válida!';
                 erro = true;
             }
+            */
+
+            switch(operacao) {
+                case 'SOMAR': case '+':
+                    resultado = numero1 + numero2;
+                    break;
+                case 'SUBTRAIR': case '-':
+                    resultado = numero1 - numero2;
+                    break;
+                case 'MULTIPLICAR': case '*':
+                    resultado = numero1 * numero2;
+                    break;
+                case 'DIVIDIR': case '/':
+                    if(numero2 == 0) {
+                        resultado = 'ERRO: Não é possível realizar a divisão por zero!'
+                        erro = true;
+                    } else{
+                        resultado = numero1 / numero2;
+                    }
+                    break;
+                default:
+                    resultado = 'ERRO: Não foi escolhida uma operação válida!';
+                    erro = true;
+            }
 
             if(erro) {
                 console.log(resultado);
+                exit();
             } else {
                 console.log('\nO resultado é igual a: ' + resultado);
             }
