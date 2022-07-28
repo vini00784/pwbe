@@ -28,6 +28,7 @@ entradaDados.question('Digite o número1: ', function(valor1){
             
             let operacao = opcao.toUpperCase();
             let resultado;
+            let erro = false;
 
             if(operacao == 'SOMAR' || operacao == '+') {
                 resultado = numero1 + numero2;    
@@ -37,9 +38,17 @@ entradaDados.question('Digite o número1: ', function(valor1){
                 resultado = numero1 * numero2;
             } else if(operacao == 'DIVIDIR' || operacao == '/') {
                 resultado = numero1 / numero2;
+            } else {
+                resultado = 'ERRO: Não foi escolhida uma operação válida!';
+                erro = true;
             }
 
-            console.log('\nO resultado da conta é igual a: ' + resultado);
+            if(erro) {
+                console.log(resultado);
+            } else {
+                console.log('\nO resultado é igual a: ' + resultado);
+            }
+
             entradaDados.close();
         })
     });
