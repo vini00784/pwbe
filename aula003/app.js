@@ -1,5 +1,6 @@
 console.log('Calculadora Simples\n');
 
+const { type } = require('os');
 const { exit } = require('process');
 // Import da biblioteca da entrada de dados
 var readline = require('readline');
@@ -31,6 +32,11 @@ entradaDados.question('Digite o número1: ', function(valor1){
             let resultado;
             let erro = false;
 
+            if(isNaN(numero1) || isNaN(numero2)) {
+                resultado = 'ERRO: A informação inserida não é um número!';
+                erro = true;
+            } else {
+
             /*
             if(operacao == 'SOMAR' || operacao == '+') {
                 resultado = numero1 + numero2;    
@@ -48,6 +54,12 @@ entradaDados.question('Digite o número1: ', function(valor1){
 
             switch(operacao) {
                 case 'SOMAR': case '+':
+                    // if(isNaN(numero1) || isNaN(numero2)) {
+                    //     resultado = 'ERRO: O valor inserido não é um número'
+                    //     erro = true;
+                    // } else {
+                    //     resultado = numero1 + numero2;
+                    // }
                     resultado = numero1 + numero2;
                     break;
                 case 'SUBTRAIR': case '-':
@@ -68,7 +80,9 @@ entradaDados.question('Digite o número1: ', function(valor1){
                     resultado = 'ERRO: Não foi escolhida uma operação válida!';
                     erro = true;
             }
+        }
 
+            
             if(erro) {
                 console.log(resultado);
                 exit();
@@ -76,8 +90,10 @@ entradaDados.question('Digite o número1: ', function(valor1){
                 console.log('\nO resultado é igual a: ' + resultado);
             }
 
+            
+
             entradaDados.close();
-        })
+        });
     });
 
 })
