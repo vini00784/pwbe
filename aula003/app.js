@@ -39,7 +39,7 @@ entradaDados.question('Digite o número1: ', function(valor1){
                 resultado = numero1 / numero2;
             }
 
-            console.log('O resultado da conta é igual a: ' + resultado);
+            console.log('\nO resultado da conta é igual a: ' + resultado);
             entradaDados.close();
         })
     });
