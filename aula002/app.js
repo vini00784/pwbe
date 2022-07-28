@@ -70,6 +70,7 @@ entradaDados.question('Digite o nome do aluno: ', function (nome) {
                         media = (parseFloat(nota1) + parseFloat(nota2) + parseFloat(nota3) + parseFloat(nota4)) / 4;
                         console.log('O aluno ['+ nomeAluno +'], teve média igual a ' + media.toFixed(2));
                     }
+                    // O "toFixed()" permite limitar a quantidade de casas decimais
 
                     // Validação de aprovação do aluno
                     if(media >= 7) {
