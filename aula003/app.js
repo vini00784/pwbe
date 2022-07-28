@@ -20,8 +20,27 @@ entradaDados.question('Digite o número1: ', function(valor1){
     entradaDados.question('Digite o número2: ', function(valor2){
         let numero2 = parseFloat(valor2);
 
-        entradaDados.question('\nEscolha a operação a ser calculada: \n Somar[+] \n Subtrair[-] \n Multiplicar[*] \n Dividir[/] \n', function(opcao){
-            let operacao = opcao;
+        entradaDados.question('\nEscolha a operação a ser calculada: \n Somar[+] \n Subtrair[-] \n Multiplicar[*] \n Dividir[/] \n\n', function(opcao){
+
+            // Declarando a variável que vai receber o tipo de operação matemática e convertendo o texto digitado em maiúsculo
+                // toUpperCase() --> converte em MAIÚSCULO
+                // toLowerCase() --> converte em minúsculo
+            
+            let operacao = opcao.toUpperCase();
+            let resultado;
+
+            if(operacao == 'SOMAR' || operacao == '+') {
+                resultado = numero1 + numero2;    
+            } else if(operacao == 'SUBTRAIR' || operacao == '-') {
+                resultado = numero1 - numero2;
+            } else if(operacao == 'MULTIPLICAR' || operacao == '*' || operacao == 'X') {
+                resultado = numero1 * numero2;
+            } else if(operacao == 'DIVIDIR' || operacao == '/') {
+                resultado = numero1 / numero2;
+            }
+
+            console.log('O resultado da conta é igual a: ' + resultado);
+            entradaDados.close();
         })
     });
 
