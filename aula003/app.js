@@ -85,12 +85,12 @@ entradaDados.question('Digite o número1: ', function(valor1){
             
             if(erro) {
                 console.log(resultado);
+
+                // Permite sair do NodeJS
                 exit();
             } else {
                 console.log('\nO resultado é igual a: ' + resultado);
             }
-
-            
 
             entradaDados.close();
         });
