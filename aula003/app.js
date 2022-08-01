@@ -1,5 +1,8 @@
 console.log('Calculadora Simples\n');
 
+// Import do arquivo de função para realizar cálculos
+const { calcular } = require('./modulos/calculadora.js');
+
 const { type } = require('os');
 const { exit } = require('process');
 // Import da biblioteca da entrada de dados
@@ -30,65 +33,12 @@ entradaDados.question('Digite o número1: ', function(valor1){
             
             let operacao = opcao.toUpperCase();
             let resultado;
-            let erro = false;
 
-            if(isNaN(numero1) || isNaN(numero2)) {
-                resultado = 'ERRO: A informação inserida não é um número!';
-                erro = true;
-            } else {
-
-            /*
-            if(operacao == 'SOMAR' || operacao == '+') {
-                resultado = numero1 + numero2;    
-            } else if(operacao == 'SUBTRAIR' || operacao == '-') {
-                resultado = numero1 - numero2;
-            } else if(operacao == 'MULTIPLICAR' || operacao == '*') {
-                resultado = numero1 * numero2;
-            } else if(operacao == 'DIVIDIR' || operacao == '/') {
-                resultado = numero1 / numero2;
-            } else {
-                resultado = 'ERRO: Não foi escolhida uma operação válida!';
-                erro = true;
-            }
-            */
-
-            switch(operacao) {
-                case 'SOMAR': case '+':
-                    // if(isNaN(numero1) || isNaN(numero2)) {
-                    //     resultado = 'ERRO: O valor inserido não é um número'
-                    //     erro = true;
-                    // } else {
-                    //     resultado = numero1 + numero2;
-                    // }
-                    resultado = numero1 + numero2;
-                    break;
-                case 'SUBTRAIR': case '-':
-                    resultado = numero1 - numero2;
-                    break;
-                case 'MULTIPLICAR': case '*':
-                    resultado = numero1 * numero2;
-                    break;
-                case 'DIVIDIR': case '/':
-                    if(numero2 == 0) {
-                        resultado = 'ERRO: Não é possível realizar a divisão por zero!'
-                        erro = true;
-                    } else{
-                        resultado = numero1 / numero2;
-                    }
-                    break;
-                default:
-                    resultado = 'ERRO: Não foi escolhida uma operação válida!';
-                    erro = true;
-            }
-        }
+            // Chama a função que realizará os cálculos matematicos
+            if (resultado = calcular(numero1, numero2, operacao));
 
             
-            if(erro) {
-                console.log(resultado);
-
-                // Permite sair do NodeJS
-                exit();
-            } else {
+            if(resultado) {
                 console.log('\nO resultado é igual a: ' + resultado);
             }
 
