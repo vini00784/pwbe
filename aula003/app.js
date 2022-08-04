@@ -35,10 +35,7 @@ entradaDados.question('Digite o número1: ', function(valor1){
             let resultado;
 
             // Chama a função que realizará os cálculos matematicos
-            if (resultado = calcular(numero1, numero2, operacao));
-
-            
-            if(resultado) {
+            if (resultado = calcular(numero1, numero2, operacao)){
                 console.log('\nO resultado é igual a: ' + resultado);
             }
 
