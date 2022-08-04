@@ -48,7 +48,20 @@ entradaDados.question('Digite o nome do(a) aluno(a): ', function(nome1) {
                                             console.log('\nATENÇÃO!! Todos os campos precisam estar corretamente preenchidos')
                                         } else {
                                             media = (parseFloat(nota1) + parseFloat(nota2) + parseFloat(nota3) + parseFloat(nota4)) / 4
-                                            console.log(media)
+                                            
+                                            if(nota1 < 0 || nota1 > 100 || nota2 < 0 || nota2 > 100 || nota3 < 0 || nota3 > 100 || nota4 < 0 || nota4 > 100) {
+                                                console.log('\nERRO! As notas só podem ser valores entre 0 e 100')
+                                            }
+
+                                            if(media >= 70) {
+                                                statusAluno = 'APROVADO'
+                                            } else if(media < 50) {
+                                                statusAluno = 'REPROVADO'
+                                            } else if (media >= 50 && media <= 69) {
+                                                statusAluno = 'EXAME'
+                                            }
+
+                                            
                                         }
                                     })
                                 })
