@@ -7,7 +7,7 @@
 
 console.log("Calcular uma Tabuada Simples\n")
 
-const { tabuada, calcularTabuada } = require('./modulos/tabuada.js')
+const { calcularTabuada } = require('./modulos/tabuada.js')
 
 // Import da biblioteca da entrada de dados
 var readline = require('readline')
