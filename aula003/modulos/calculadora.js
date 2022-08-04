@@ -112,20 +112,20 @@ const calcular = function(valor1, valor2, opcaoCalculo) {
                 // } else {
                 //     resultado = numero1 + numero2;
                 // }
-                resultado = numero1 + numero2;
+                resultado = somar(numero1, numero2);
                 break;
             case 'SUBTRAIR': case '-':
-                resultado = numero1 - numero2;
+                resultado = subtrair(numero1, numero2);
                 break;
             case 'MULTIPLICAR': case '*':
-                resultado = numero1 * numero2;
+                resultado = multiplicar(numero1, numero2);
                 break;
             case 'DIVIDIR': case '/':
                 if(numero2 == 0) {
                     console.log('ERRO: Não é possível realizar a divisão por zero!')
                     erro = true;
                 } else{
-                    resultado = numero1 / numero2;
+                    resultado = dividir(numero1, numero2);
                 }
                 break;
             default:
@@ -137,9 +137,15 @@ const calcular = function(valor1, valor2, opcaoCalculo) {
     if(erro) {
         return false;
     } else {
-        return resultado;
+        return resultado.toFixed(2);
     }
 }
+
+// Modelo de função Arrow Function
+const somar = (valor1, valor2) => parseFloat(valor1) + parseFloat(valor2);
+const subtrair = (valor1, valor2) => parseFloat(valor1) - parseFloat(valor2);
+const multiplicar = (valor1, valor2) => parseFloat(valor1) * parseFloat(valor2);
+const dividir = (valor1, valor2) => parseFloat(valor1) / parseFloat(valor2);
 
 // As funções que serão importadas em outros projetos, precisam obrigatoriamente serem incluídas no module.exports
 // As funções que não forem incluídas no module.exports irá funcionar apenas localmente neste arquivo
