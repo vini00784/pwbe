@@ -24,8 +24,13 @@ const calcularTabuada = function(valorInicial, valorFinal, contador1, contador2)
         erro = true
     } else {
         while(true) {
-            resultado = numero1 * contadorInicial
-            console.log(resultado)
+            while(numero1 <= numero2) {
+                for(contadorInicial; contadorInicial <= contadorFinal; contadorInicial++) {
+                    resultado = numero1 * contadorInicial
+                    console.log(`\n${numero1} X ${contadorInicial} = ${resultado}`)
+                }
+
+            }
         }
     }
 
