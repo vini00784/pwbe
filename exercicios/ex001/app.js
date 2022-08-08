@@ -44,6 +44,7 @@ entradaDados.question('Digite o nome do(a) aluno(a): ', function(nome1) {
                                         let nota4 = valor4
                                         let media
                                         let statusAluno
+                                        let mediaExame
                                         let notaExame
                                         let generoProfessor
                                         let generoAluno
@@ -68,6 +69,7 @@ entradaDados.question('Digite o nome do(a) aluno(a): ', function(nome1) {
                                                     //     notaExame = parseFloat(valor5)
                                                     // })
                                                     // notaExame = (notaExame + media) / 2
+                                                    
                                                 }
     
                                                 if(isNaN(nota1) || isNaN(nota2) || isNaN(nota3) || isNaN(nota4)) {
@@ -90,16 +92,13 @@ entradaDados.question('Digite o nome do(a) aluno(a): ', function(nome1) {
                                                     } else if(sexoProfessor == 'FEMININO') {
                                                         generoProfessor = 'Professora'
                                                     }
-
-                                                    
-
-                                                    console.log(`\n${generoAluno} ${nomeAluno} foi ${statusAluno} na disciplina ${disciplina}.`)
-                                                    console.log(`Curso: ${curso}`)
-                                                    console.log(`${generoProfessor} ${nomeProfessor}`)
-                                                    console.log(`Notas do aluno: ${nota1}, ${nota2}, ${nota3}, ${nota4}`)
-                                                    console.log(`Média final: ${media}`)
-                                                    // console.log(`Média final do Exame: ${notaExame}`)
                                                 }
+                                                console.log(`\n${generoAluno} ${nomeAluno} foi ${statusAluno} na disciplina ${disciplina}.`)
+                                                console.log(`Curso: ${curso}`)
+                                                console.log(`${generoProfessor} ${nomeProfessor}`)
+                                                console.log(`Notas do aluno: ${nota1}, ${nota2}, ${nota3}, ${nota4}`)
+                                                console.log(`Média final: ${media}`)
+                                                // console.log(`Média final do Exame: ${notaExame}`)
                                             }
 
 
