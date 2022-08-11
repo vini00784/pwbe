@@ -31,8 +31,33 @@ const parImpar = function(valor1, valor2, escolha) {
             }
         }
 
-        if(operacao == 'PARES') {
-            console.log('')
+        if(opcao == 'PARES') {
+            console.log('\n*** NÚMEROS PARES: ***')
+            for(let contador = 0; contador < numerosPares.length; contador++) {
+                console.log(`\t${numerosPares[contador]}`)
+            }
+            console.log(`Quantidade de pares: ${numerosPares.length}\n`)
+            process.exit(1)
+        } else if(opcao == 'ÍMPARES') {
+            console.log('\n*** NÚMEROS ÍMPARES: ***')
+            for(let contador = 0; contador < numerosImpares.length; contador++) {
+                console.log(`\t${numerosImpares[contador]}`)
+            }
+            console.log(`Quantidade de pares: ${numerosImpares.length}\n`)
+            process.exit(1)
+        } else if(opcao == 'AMBOS') {
+            console.log('\n*** NÚMEROS PARES: ***')
+            for(let contador = 0; contador < numerosPares.length; contador++) {
+                console.log(`\t${numerosPares[contador]}`)
+            }
+            console.log(`Quantidade de pares: ${numerosPares.length}\n`)
+
+            console.log('\n*** NÚMEROS ÍMPARES: ***')
+            for(let contador = 0; contador < numerosImpares.length; contador++) {
+                console.log(`\t${numerosImpares[contador]}`)
+            }
+            console.log(`Quantidade de pares: ${numerosImpares.length}\n`)
+            process.exit(1)
         }
     }
 }

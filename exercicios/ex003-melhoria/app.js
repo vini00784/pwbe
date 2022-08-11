@@ -16,13 +16,13 @@ var entradaDados = readline.createInterface({
     output: process.stdout
 })
 
-entradaDados.question('Digite um número inicial: (0 a 500)', function(valor1) {
+entradaDados.question('Digite um número inicial (0 a 500): ', function(valor1) {
     let numeroInicial = valor1
     
-    entradaDados.question('Digite um número final: (100 até 1000)', function(valor2) {
+    entradaDados.question('Digite um número final (100 até 1000): ', function(valor2) {
         let numeroFinal = valor2
         
-        entradaDados.question('Escolha uma opão de exibição: \nPares \nÍmpares \nAmbos\n', function(escolha) {
+        entradaDados.question('Escolha uma opção de exibição: \nPares \nÍmpares \nAmbos\n', function(escolha) {
             let opcao = escolha
 
             parImpar(numeroInicial, numeroFinal, opcao)
