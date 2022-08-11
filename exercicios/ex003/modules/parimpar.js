@@ -8,6 +8,8 @@
 const parImpar = function(numero1, numero2) {
     let numeroInicial = numero1
     let numeroFinal = numero2
+    let numerosPares = []
+    let numerosImpares = []
 
     if(numeroInicial == '' || numeroFinal == '') {
         console.log('\nERRO! Os campos devem ser corretamente preenchidos!')
@@ -19,7 +21,28 @@ const parImpar = function(numero1, numero2) {
         console.log('\nERRO! O número inicial deve ser MENOR do que o final!')
     } else if(numeroInicial == numeroFinal) {
         console.log('\nERRO! Os números não podem ser iguais!')
+    } else {
+        for (let numero = numeroInicial; numero <= numeroFinal; numero++) {
+            if((numero % 2 == 0)) {
+                numerosPares.push(numero)
+            } else {
+                numerosImpares.push(numero)
+            }
+        }
+        console.log(`\n*** NÚMEROS PARES: ***`)
+        for(let contador = 0; contador < numerosPares.length; contador++) {
+            console.log(`\t${numerosPares[contador]}`)
+        }
+        console.log(`Quantidade de pares: ${numerosPares.length}`)
+
+        console.log('\n*** NÚMEROS ÍMPARES: ***')
+        for (let contador = 0; contador < numerosPares.length; contador++) {
+            console.log(`\t${numerosImpares[contador]}`)
+        }
+        console.log(`Quantidade de ímpares: ${numerosImpares.length}\n`)
+        process.exit(1)
     }
+
 }
 
 module.exports = {
