@@ -22,7 +22,7 @@ entradaDados.question('Digite um número inicial (0 a 500): ', function(valor1) 
     entradaDados.question('Digite um número final (100 até 1000): ', function(valor2) {
         let numeroFinal = valor2
         
-        entradaDados.question('Escolha uma opção de exibição: \nPares \nÍmpares \nAmbos\n', function(escolha) {
+        entradaDados.question('Escolha uma opção de exibição: \n\tPares \n\tÍmpares \n\tAmbos\n', function(escolha) {
             let opcao = escolha
 
             parImpar(numeroInicial, numeroFinal, opcao)
