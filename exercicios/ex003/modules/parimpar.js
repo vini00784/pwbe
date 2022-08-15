@@ -36,7 +36,7 @@ const parImpar = function(numero1, numero2) {
         console.log(`Quantidade de pares: ${numerosPares.length}`)
 
         console.log('\n*** NÚMEROS ÍMPARES: ***')
-        for (let contador = 0; contador < numerosPares.length; contador++) {
+        for (let contador = 0; contador < numerosImpares.length; contador++) {
             console.log(`\t${numerosImpares[contador]}`)
         }
         console.log(`Quantidade de ímpares: ${numerosImpares.length}\n`)
