@@ -6,8 +6,8 @@
 */
 
 const parImpar = function(valor1, valor2, escolha) {
-    let numeroInicial = valor1
-    let numeroFinal = valor2
+    let numeroInicial = parseFloat(valor1)
+    let numeroFinal = parseFloat(valor2)
     let opcao = escolha.toUpperCase()
     let numerosPares = []
     let numerosImpares = []
@@ -56,7 +56,7 @@ const parImpar = function(valor1, valor2, escolha) {
             for(let contador = 0; contador < numerosImpares.length; contador++) {
                 console.log(`\t${numerosImpares[contador]}`)
             }
-            console.log(`Quantidade de pares: ${numerosImpares.length}\n`)
+            console.log(`Quantidade de ímpares: ${numerosImpares.length}\n`)
             process.exit(1)
         }
     }
