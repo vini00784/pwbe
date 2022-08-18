@@ -7,7 +7,7 @@
 
 console.log('Calculadora de Par e Ímpar\n')
 
-const { parImpar } = require('./modules/parimpar.js')
+const { parImpar } = require('./modules/parImpar.js')
 
 var readline = require('readline')
 
