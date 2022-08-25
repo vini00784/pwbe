@@ -111,3 +111,60 @@ console.log(listaNovosAlunos[8][0])
 
 // Seguindo o mesmo raciocínio, a linha seguinte busca o índice de um elemento que está dentro da sub Array
 console.log(listaNovosAlunos[8].indexOf('Banco de Dados'))
+
+
+
+
+
+
+
+
+
+
+
+console.log('----------------------------------------------------------')
+
+// Trabalhando com JSON
+
+const listaContatos = [
+    {
+        nome: 'José da Silva',
+        telefone: '11  9945646455',
+        email: 'jose@gmail.com',
+        carros: [
+            {
+                placa: 'ABC-1234',
+                modelo: 'Corsa',
+                cor: 'Prata'
+            }, 
+            {
+                placa: 'DEF-5678',
+                modelo: 'Fusca',
+                cor: 'Azul'
+            }
+        ]
+    },
+    {
+        nome: 'Maria Bahia Santos',
+        telefone: '11 938456198',
+        email: 'maria@gmail.com'
+    }
+]
+
+console.log(listaContatos)
+
+console.log(`Nome: ${listaContatos.nome}`)
+console.log(`O email cadastrado foi: ${listaContatos.email}`)
+
+// Adiciona um novo elemento no JSON em execução
+listaContatos.celular = '944400997'
+
+console.log(listaContatos)
+
+// Remove um elemento do JSON em execução
+delete(listaContatos.telefone)
+
+console.log(listaContatos[1].telefone)
+
+console.log(listaContatos[0].carros[0].placa)
+
