@@ -55,6 +55,7 @@ entradaDados.question('Digite um número inicial (0 a 500): ', function(number1)
                 let bothNumbers = evenAndOdd(startNumber, finalNumber)
                 console.log('\n*** NÚMEROS (PARES E ÍMPARES): ***')
                 console.log(bothNumbers)
+                process.exit(1)
             }
         }) 
     })
