@@ -6,8 +6,8 @@
 */
 
 const evenNumbers = function(number1, number2) {
-    let startNumber = parseFloat(number1)
-    let finalNumber = parseFloat(number2)
+    let startNumber = parseInt(number1)
+    let finalNumber = parseInt(number2)
     let evenNumbers = []
 
     for (let numero = startNumber; numero <= finalNumber; numero++) {
@@ -21,8 +21,8 @@ const evenNumbers = function(number1, number2) {
 
 
 const oddNumbers = function(number1, number2) {
-    let startNumber = parseFloat(number1)
-    let finalNumber = parseFloat(number2)
+    let startNumber = parseInt(number1)
+    let finalNumber = parseInt(number2)
     let oddNumbers = []
 
     
@@ -36,8 +36,8 @@ const oddNumbers = function(number1, number2) {
 }
 
 const evenAndOdd = function(number1, number2) {
-    let startNumber = parseFloat(number1)
-    let finalNumber = parseFloat(number2)
+    let startNumber = parseInt(number1)
+    let finalNumber = parseInt(number2)
     let evenAndOdd = []
     
     evenAndOdd.push(evenNumbers(startNumber, finalNumber))
@@ -47,8 +47,8 @@ const evenAndOdd = function(number1, number2) {
 }
 
 const validate = function(number1, number2, choice) {
-    let startNumber = parseFloat(number1)
-    let finalNumber = parseFloat(number2)
+    let startNumber = parseInt(number1)
+    let finalNumber = parseInt(number2)
     let option = choice
 
     if (startNumber == '' || finalNumber == '' || option == '') {
