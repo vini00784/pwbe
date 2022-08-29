@@ -40,6 +40,11 @@ const evenAndOdd = function(number1, number2) {
     let finalNumber = parseInt(number2)
     let evenAndOdd = []
     
+    // A linha abaixo adiciona ao Array "EvenAndOdd", os números encontrados ao chamar a função "evenNumbers"
+        // A debaixo faz a mesma coisa só que com a função "oddNumbers"
+        // Dessa forma é mais fácil pois o movimento de adicionar ao Array "evenAndOdd" completa a ação já chamando as respectivas funções
+        // Caso contrário, uma outra forma de fazer seria criando três Arrays, um para os pares, um para os ímpares e um para ambos os números
+        // E aí, seria adicionado (push) ao Array dos ambos, os outros dois Arrays criados anteriormente
     evenAndOdd.push(evenNumbers(startNumber, finalNumber))
     evenAndOdd.push(oddNumbers(startNumber, finalNumber))
 
