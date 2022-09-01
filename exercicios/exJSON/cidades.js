@@ -22424,19 +22424,25 @@ var cidades =  [
    }
 ]
 
-const getEstado = function(siglaEstado){
+const getCidades = function(siglaEstado){
    let sigla = siglaEstado
-   let estado = []
+   let listaCidades = []
    let erro = true
 
    if(sigla != undefined) {
       if(sigla != '' && sigla.length == 2) {
+         // Esse forEach percorre o Array de cidadaes para validar a sigla do estado 
          cidades.forEach(item => {
+
+            // Localiza a sigla do estado dentro do Array de cidades
             if(item.sigla.indexOf(sigla.toUpperCase()) == 0) {
-               estado.push(item.sigla)
-               estado.push(item.nome)
-               estado.push(item.cidades)
-               erro = false
+
+               // Percorre o array da chave 'cidades' dentro do estado definido
+               item.cidades.forEach(item2 => {
+                  listaCidades.push(item2.nome)
+                  erro = false
+               })
+
             }
          })
       }
@@ -22445,8 +22451,8 @@ const getEstado = function(siglaEstado){
    if(erro) {
       return false 
    } else {
-      return estado
+      return listaCidades
    }
 }
 
-console.log(getEstado('AC'))
+console.table(getCidades('s'))
