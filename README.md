@@ -90,3 +90,16 @@ Para extrar SOMENTE a placa do primeiro carro do José, usa-se:
     listaContatos[0].carros[0].placa
 
 Assim, a placa solicitada será extraída
+
+---
+
+# PostMan (API)
+Verbos que usaremos:
+
+Get --> Pegar (listar) o conteúdo do Back-End
+
+Post --> Quando se tem o contéudo no Back-End e é preciso enviá-lo
+
+Put --> Quando o Back-End já tem conteúdo mas é preciso modificar
+
+Delete --> Quando preciso deletar
