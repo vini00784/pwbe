@@ -103,3 +103,8 @@ Post --> Quando se tem o contéudo no Back-End e é preciso enviá-lo
 Put --> Quando o Back-End já tem conteúdo mas é preciso modificar
 
 Delete --> Quando preciso deletar
+
+## Rota (endPoint)
+Quando uma API é criada, deve-se criar endPoints.
+
+Ela "escuta" palavras-chaves. No caso de uma lista de estados, programaria-se um endPoint da palavra 'estado', e toda vez que ela "ouvisse" essa palavra, haveria um listamento de estados.
