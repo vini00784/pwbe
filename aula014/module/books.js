@@ -2353,6 +2353,7 @@ var livros = [
 const getBooks = function(code){
     let keyword = code.toLowerCase()
     let booksList = []
+    let totalBooks = {}
     let erro = true
     
     if(keyword != undefined) {
@@ -2361,15 +2362,19 @@ const getBooks = function(code){
                 item.books.forEach(item2 => {
                     if(item2.title.toLowerCase().indexOf(keyword) != -1) {
 
-                        booksList.push({
-                            name: item2.title,
-                            description:item2.subtitle,
-                            price: item2.price,
-                            img: item2.image
-                        })
-                        erro = false
-                    }
-                })
+                        booksList.push(
+                            {
+                                name: item2.title,
+                                description:item2.subtitle,
+                                price: item2.price,
+                                img: item2.image
+                            })
+                            erro = false
+                        }
+                    })
+                let total = booksList.length
+                totalBooks.total = total
+                totalBooks.books = booksList
             })
         }
     }
@@ -2377,7 +2382,7 @@ const getBooks = function(code){
     if(erro) {
         return false
     } else {
-        return booksList
+        return totalBooks
     }
 }
 
