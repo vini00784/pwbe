@@ -19,7 +19,7 @@ const cors = require('cors')
 // Import da biblioteca do body-parser que irá manipular corpo das requisições do protocolo HTTP
 const bodyParser = require('body-parser')
 
-// Import dos arrays/jsons de estados
+// Import dos arrays/jsons de estados e cidades
 const { getStateAbbreviation, getStateData } = require('./module/states.js')
 const { getCidades } = require('./module/cidades.js')
 
@@ -90,11 +90,15 @@ app.get('/estado/:sigla', cors(), async function(request, response, next){
 app.get('/cidades/:sigla', cors(), async function(request, response, next) {
     let abbreviation = request.params.sigla
 
+    // A lógica seguinte é usada porque a função getCidades retorna um array, o que não é o ideal, já que uma API costuma retornar JSON's
+        // Portanto, cria-se um objeto do tipo JSON para guardar o array que a função retorna.
     let cities = getCidades(abbreviation)
+    let citiesJSON = {}
 
     if(cities) {
+        citiesJSON.cities = cities
         response.status(200)
-        response.json(cities)
+        response.json(citiesJSON)
     } else {
         response.status(404)
     }
@@ -103,5 +107,5 @@ app.get('/cidades/:sigla', cors(), async function(request, response, next) {
 // Para que os endPoints possam estar funcionando, precisamos obrigatoriamente finalizar a API com essa function, que representa o start da API
 // É como o main do JAVA, mas no caso ele "starta" a API para iniciar a busca por requisições
 app.listen(3030, function(){
-    console.log('Servidor aguardando requisições...')
+    console.log('Server waiting for requests...')
 })
