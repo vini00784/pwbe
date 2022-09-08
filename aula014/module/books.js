@@ -2372,8 +2372,7 @@ const getBooks = function(code){
                             erro = false
                         }
                     })
-                let total = booksList.length
-                totalBooks.total = total
+                totalBooks.total = booksList.length
                 totalBooks.books = booksList
             })
         }
