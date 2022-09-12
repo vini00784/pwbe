@@ -22,7 +22,7 @@ app.use ((request, response, next) => {
     next()
 })
 
-app.get('/book/:palavraChave', cors(), async function(request, response, next){
+app.get('/books/:palavraChave', cors(), async function(request, response, next){
     let keyword = request.params.palavraChave
 
     let books = getBooks(keyword)
