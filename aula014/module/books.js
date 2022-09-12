@@ -2353,18 +2353,24 @@ var livros = [
 const getBooks = function(code){
     let keyword = code.toLowerCase()
     let booksList = []
-    let totalBooks = {}
+    let booksJSON = {}
     let erro = true
     
     if(keyword != undefined) {
         if(keyword != '') {
+            // Percorre o array principal de livros
             livros.forEach(item => {
+                // Percorre a chave books dentro de livros
                 item.books.forEach(item2 => {
-                    if(item2.title.toLowerCase().indexOf(keyword) != -1) {
+                    // A forma usada para fazer o IF que localiza a palavra-chave usa o comando includes, mas há outra maneira usando o indexOf:
+                        
+                    // if(item2.title.toLowerCase().indexOf(keyword) != -1)
+                    if(item2.title.toLowerCase().includes(keyword)) {
 
+                        // Adiciona no array um JSON com todos os elementos solicitados
                         booksList.push(
                             {
-                                name: item2.title,
+                                title: item2.title,
                                 description:item2.subtitle,
                                 price: item2.price,
                                 img: item2.image
@@ -2372,8 +2378,8 @@ const getBooks = function(code){
                             erro = false
                         }
                     })
-                totalBooks.total = booksList.length
-                totalBooks.books = booksList
+                booksJSON.total = booksList.length
+                booksJSON.books = booksList
             })
         }
     }
@@ -2381,7 +2387,7 @@ const getBooks = function(code){
     if(erro) {
         return false
     } else {
-        return totalBooks
+        return booksJSON
     }
 }
 
