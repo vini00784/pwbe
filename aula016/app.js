@@ -5,10 +5,11 @@
     Versão:       1.0
 */
 
-// Comandos a serem rodados além do express, cors e body-parser:
+// Comandos a serem rodados (nessa sequência) além do express, cors e body-parser:
     // npm install prisma --save
     // npx prisma
     // npx prisma init
+    // npm install @prisma/client
         // Eles preparam o ambiente de utilização do Prisma
 
 const express = require('express')
