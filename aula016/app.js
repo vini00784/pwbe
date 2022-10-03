@@ -6,11 +6,12 @@
 */
 
 // Comandos a serem rodados (nessa sequência) além do express, cors e body-parser:
-    // npm install prisma --save
-    // npx prisma
-    // npx prisma init
-    // npm install @prisma/client
-        // Eles preparam o ambiente de utilização do Prisma
+    // O prisma é necessário para a manipulação do acesso ao Banco de Dados
+        // npm install prisma --save
+        // npx prisma
+        // npx prisma init
+        // npm install @prisma/client
+            // Eles preparam o ambiente de utilização do Prisma
 
 const express = require('express')
 const cors = require('cors')
