@@ -22,7 +22,9 @@ app.use ((request, response, next) => {
     next()
 })
 
+// EndPoint para buscar os livros
 app.get('/books/:palavraChave', cors(), async function(request, response, next){
+    // Recebe a variável que será enviada na requisição através de um paramêtro de URL
     let keyword = request.params.palavraChave
 
     let books = getBooks(keyword)
@@ -35,6 +37,23 @@ app.get('/books/:palavraChave', cors(), async function(request, response, next){
     }
 })
 
-app.listen(3030, function(){
+// EndPoint para filtrar os livros
+app.get('/books/', cors(), async function(request, response, next){
+    // Recebe a variável keyword por QueryString(indicada quando precisamos criar filtros)
+    // OBS IMPORTANTE:
+        // No Postman, o nome da chave deve ser igual ao nome que vem após o query.
+    let keyword = request.query.name
+
+    let books = getBooks(keyword)
+
+    if(books) {
+        response.status(200)
+        response.json(books)
+    } else {
+        response.status(404)
+    }
+})
+
+app.listen(8080, function(){
     console.log('Server waiting for requests...')
 })
