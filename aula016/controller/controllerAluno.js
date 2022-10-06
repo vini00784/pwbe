@@ -25,7 +25,7 @@ const deleteStudent = async (id) => {
 
 // Função que lista os alunos registrados no BD
 const listStudents = async () => {
-    const { selectAllStudents } = require('model/DAO/aluno.js')
+    const { selectAllStudents } = require('../model/DAO/aluno.js')
 
     const studentsData = await selectAllStudents()
 
