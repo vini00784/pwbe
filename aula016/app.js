@@ -12,6 +12,10 @@
         // npx prisma init
         // npm install @prisma/client
             // Eles preparam o ambiente de utilização do Prisma
+            // npx prisma migrate dev --> comando que faz uma ligação do prisma com o banco, é feito para testar se o prisma realmente consegue acessar o banco
+                // É importante rodar esse comando no início do projeto para ver se está dando tudo certo
+                // O sucesso da criação de uma tabela de teste mostra que a interação com o banco está acontecendo.
+                    // OBS.: Esse comando de teste limpa tudo o que tem no banco, por isso ele deve ser rodada NO INÍCIO DO PROJETO!!!
 
 const express = require('express')
 const cors = require('cors')
