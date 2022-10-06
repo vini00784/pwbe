@@ -10,7 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model tbl_usuario {
-  id Int @id @default(autoincrement())
-  nome String
-}
+// model tbl_usuario {
+//  id Int @id @default(autoincrement())
+//  nome String
+//}
+
+// Para realizar o primeiro acesso ao banco é importante criar uma model e verificar se ela ela é criada no BD
+// Precisa ser feito pelo menos durante a primeira vez, para saber se o prisma tem acesso ao BD.
+  // npx prisma migrate dev
