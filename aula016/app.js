@@ -38,6 +38,9 @@ app.use((request, response, next) => {
     next()
 })
 
+// Criando um objeto que permite receber um JSONno body das requisições
+const jsonParser = bodyParser.json()
+
 /* 
     Rotas para CRUD de alunos
     Data: 10/10/2022
@@ -46,4 +49,55 @@ app.use((request, response, next) => {
 // EndPoint para listagem de todos os alunos
 app.get('/alunos', cors(), async (request, response) => {
 
+    let statusCode
+    let message
+
+    // Import do arquivo controllerAluno
+    const controllerAluno = require('./controller/controllerAluno.js')
+
+    // Retorna todos os alunos existentes no banco de dados
+    const studentsData = await controllerAluno.listAllStudents()
+
+    // Validade se existe retorno de dados
+    if(studentsData) {
+        statusCode = 200
+        message = studentsData
+    } else {
+        statusCode = 404
+        message = 'Nenhum aluno encontrado'
+    }
+
+    // Retorna os dados da API
+
+    // console.log(message)
+
+    response.status(statusCode)
+    response.json(message)
+
+})
+
+// EndPoint para inserir um novo aluno
+app.post('/aluno', cors(), jsonParser, async (request, response) => {
+    let statusCode
+    let message
+    let headerContentType
+
+    headerContentType = request.headers['content-type'] // Nos traz o formato de dados da requisição
+    // console.log(headerContentType);
+
+    if(headerContentType == 'application/json') {
+        statusCode = 200
+        message = 'Sucesso'
+    } else {
+        statusCode = 415
+        message = 'Content-Type incorreto. Esta requisição aceita apenas JSON'
+    }
+
+    // response.status(statusCode)
+    // response.json(message)
+})
+
+// Ativa o servidor para receber requisições http
+app.listen(3030, () => {
+    console.log('Server waiting for requests...');
 })
