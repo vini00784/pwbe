@@ -20,6 +20,7 @@
                         OBS.: Esse comando de teste limpa tudo o que tem no banco, por isso ele deve ser rodada NO INÍCIO DO PROJETO!!!
 */
 
+// Import das bibliotecas
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -28,6 +29,7 @@ const bodyParser = require('body-parser')
 
 const app = express()
 
+// Configuração do cors para liberar o acesso à API
 app.use((request, response, next) => {
     response.header('Access-Control-Allow-Origin', '*')
     response.header('Access-Control-Allow-Methos', 'GET, POST, PUT, DELETE, OPTIONS')
