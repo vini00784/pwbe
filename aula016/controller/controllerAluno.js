@@ -24,10 +24,15 @@ const deleteStudent = async (id) => {
 }
 
 // Função que lista os alunos registrados no BD
-const listStudents = async () => {
+const listAllStudents = async () => {
     const { selectAllStudents } = require('../model/DAO/aluno.js')
 
     const studentsData = await selectAllStudents()
+
+    // Conversão do tipo de dados BigInt para Int (DE FORMA PROVISÓRIA!)
+    studentsData.forEach(element => {
+        element.id = Number(element.id)
+    })
 
     if(studentsData) {
         return studentsData
@@ -35,4 +40,8 @@ const listStudents = async () => {
         return false
     }
 
+}
+
+module.exports = {
+    listAllStudents
 }
