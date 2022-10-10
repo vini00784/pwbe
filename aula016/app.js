@@ -37,3 +37,13 @@ app.use((request, response, next) => {
     app.use(cors())
     next()
 })
+
+/* 
+    Rotas para CRUD de alunos
+    Data: 10/10/2022
+*/
+
+// EndPoint para listagem de todos os alunos
+app.get('/alunos', cors(), async (request, response) => {
+
+})
