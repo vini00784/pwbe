@@ -9,12 +9,12 @@
 // const { insertStudent, selectAllStudents } = require('../model/DAO/aluno.js')
 
 // Função que gera novo aluno no BD
-const newStudent = async (aluno) => {
+const newStudent = async (student) => {
 
     // Validação dos campos obrigatórios
-    if(aluno.nome == '' || aluno.foto == '' || aluno.rg == '' || aluno.cpf == ''|| aluno.email == '' || aluno.data_nascimento == '') {
+    if(student.nome == '' || student.foto == '' || student.rg == '' || student.cpf == ''|| student.email == '' || student.data_nascimento == '') {
         return false
-    } else if(!aluno.email.includes('@')) { // Validação se o email digitado possui o '@'
+    } else if(!student.email.includes('@')) { // Validação se o email digitado possui o '@'
         return false
     } else {
 
@@ -22,7 +22,7 @@ const newStudent = async (aluno) => {
         const newStudent = require('../model/DAO/aluno.js')
 
         // Chama a função para inserir um novo aluno
-        const result = newStudent.insertStudent()
+        const result = newStudent.insertStudent(student)
 
         if(result) {
             return true
@@ -33,7 +33,7 @@ const newStudent = async (aluno) => {
 }
 
 // Função que atualiza um registro de aluno no BD
-const updateStudent = async (aluno) => {
+const updateStudent = async (student) => {
 
 }
 

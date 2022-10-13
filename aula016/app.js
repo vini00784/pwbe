@@ -90,8 +90,20 @@ app.post('/aluno', cors(), jsonParser, async (request, response) => {
 
         // Realiza processo de conversão de dados para conseguir identificar um JSON vazio
         if(JSON.stringify(bodyData) != '{}') {
-            statusCode = 200
-            message = 'Sucesso'
+            // Import do arquivo da Controller de aluno
+            const controllerAluno = require('./controller/controllerAluno.js')
+
+            // Chama a função newStudent da controller e encaminha os dados do body
+            const newStudent = controllerAluno.newStudent(bodyData)
+
+            if(newStudent) {
+                statusCode = 201
+                message = 'Item criado com sucesso'
+            } else {
+                statusCode = 400
+                message = 'O item não foi criado'
+            }
+
 
         } else {
             statusCode = 400

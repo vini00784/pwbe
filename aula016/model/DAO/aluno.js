@@ -23,15 +23,15 @@ const insertStudent = async (student) => {
                                       telefone, 
                                       celular)
                                       values (
-                                        ${student.nome},
-                                        ${student.foto},
-                                        ${student.sexo},
-                                        ${student.rg},
-                                        ${student.cpf},
-                                        ${student.email},
-                                        ${student.data_nascimento},
-                                        ${student.telefone},
-                                        ${student.celular}
+                                        '${student.nome}',
+                                        '${student.foto}',
+                                        '${student.sexo}',
+                                        '${student.rg}',
+                                        '${student.cpf}',
+                                        '${student.email}',
+                                        '${student.data_nascimento}',
+                                        '${student.telefone}',
+                                        '${student.celular}'
                                       )`
 
                                       
