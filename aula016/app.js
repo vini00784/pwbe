@@ -83,11 +83,21 @@ app.post('/aluno', cors(), jsonParser, async (request, response) => {
     let headerContentType
 
     headerContentType = request.headers['content-type'] // Nos traz o formato de dados da requisição
-    // console.log(headerContentType);
 
+    // Validar se o ContentType é do tipo application/json
     if(headerContentType == 'application/json') {
-        statusCode = 200
-        message = 'Sucesso'
+        let bodyData = request.body
+
+        // Realiza processo de conversão de dados para conseguir identificar um JSON vazio
+        if(JSON.stringify(bodyData) != '{}') {
+            statusCode = 200
+            message = 'Sucesso'
+
+        } else {
+            statusCode = 400
+            message = 'Este tipo de requisição precisa de conteúdo no Body!'
+        }
+
     } else {
         statusCode = 415
         message = 'Content-Type incorreto. Esta requisição aceita apenas JSON'
