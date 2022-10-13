@@ -94,7 +94,7 @@ app.post('/aluno', cors(), jsonParser, async (request, response) => {
             const controllerAluno = require('./controller/controllerAluno.js')
 
             // Chama a função newStudent da controller e encaminha os dados do body
-            const newStudent = controllerAluno.newStudent(bodyData)
+            const newStudent = await controllerAluno.newStudent(bodyData)
 
             if(newStudent) {
                 statusCode = 201
