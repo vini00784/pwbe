@@ -7,13 +7,45 @@
 
 // Import da classe PrismaClient, que é responsável pelas interações com o Banco de Dados
 const { PrismaClient } = require('@prisma/client')
+const { transformDocument } = require('@prisma/client/runtime')
 
 // Instância da classe PrismaClient
 const prisma = new PrismaClient()
 
 // Função para inserir um novo registro de aluno no banco de dados
 const insertStudent = async (student) => {
-    let sql
+    let sql = `insert into tbl_aluno (nome, 
+                                      foto, 
+                                      sexo, 
+                                      rg, 
+                                      cpf, 
+                                      email, 
+                                      data_nascimento, 
+                                      telefone, 
+                                      celular)
+                                      values (
+                                        ${student.nome},
+                                        ${student.foto},
+                                        ${student.sexo},
+                                        ${student.rg},
+                                        ${student.cpf},
+                                        ${student.email},
+                                        ${student.data_nascimento},
+                                        ${student.telefone},
+                                        ${student.celular}
+                                      )`
+
+                                      
+    // Executa o script SQL no BD
+    // $executeRawUnsafe --> permite encaminhar uma variável contendo o script
+    const result = await prisma.$executeRawUnsafe(sql)
+
+    // Verifica se o script foi executado com sucesso no Banco de Dados
+    if(result) {
+        return true
+    } else {
+        return false
+    }
 }
 
 // Função para atualizar um registro de aluno no banco de dados
