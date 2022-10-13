@@ -11,6 +11,14 @@
 // Função que gera novo aluno no BD
 const newStudent = async (aluno) => {
 
+    // Validação dos campos obrigatórios
+    if(aluno.nome == '' || aluno.foto == '' || aluno.rg == '' || aluno.cpf == ''|| aluno.email == '' || aluno.data_nascimento == '') {
+        return false
+    } else if(!aluno.email.includes('@')) { // Validação se o email digitado possui o '@'
+        return false
+    } else {
+        
+    }
 }
 
 // Função que atualiza um registro de aluno no BD
