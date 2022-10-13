@@ -6,7 +6,7 @@
 */
 
 // Import das funções
-// const { selectAllStudents } = require('../model/DAO/aluno.js')
+// const { insertStudent, selectAllStudents } = require('../model/DAO/aluno.js')
 
 // Função que gera novo aluno no BD
 const newStudent = async (aluno) => {
@@ -17,7 +17,18 @@ const newStudent = async (aluno) => {
     } else if(!aluno.email.includes('@')) { // Validação se o email digitado possui o '@'
         return false
     } else {
-        
+
+        // Import da model de aluno
+        const newStudent = require('../model/DAO/aluno.js')
+
+        // Chama a função para inserir um novo aluno
+        const result = newStudent.insertStudent()
+
+        if(result) {
+            return true
+        } else {
+            return false
+        }
     }
 }
 
@@ -56,5 +67,6 @@ const listAllStudents = async () => {
 }
 
 module.exports = {
+    newStudent,
     listAllStudents
 }
