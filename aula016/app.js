@@ -103,8 +103,8 @@ app.post('/aluno', cors(), jsonParser, async (request, response) => {
         message = 'Content-Type incorreto. Esta requisição aceita apenas JSON'
     }
 
-    // response.status(statusCode)
-    // response.json(message)
+    response.status(statusCode)
+    response.json(message)
 })
 
 // Ativa o servidor para receber requisições http
