@@ -12,7 +12,7 @@
 const newStudent = async (student) => {
 
     // Validação dos campos obrigatórios
-    if(student.nome == '' || student.foto == '' || student.rg == '' || student.cpf == ''|| student.email == '' || student.data_nascimento == '') {
+    if(student.nome == '' || student.nome == undefined || student.foto == '' || student.foto == undefined || student.rg == '' || student.rg == undefined || student.cpf == '' || student.cpf == undefined|| student.email == '' || student.email == undefined || student.data_nascimento == '' || student.data_nascimento == undefined) {
         return false
     } else if(!student.email.includes('@')) { // Validação se o email digitado possui o '@'
         return false
@@ -58,6 +58,8 @@ const listAllStudents = async () => {
         })
 
         studentsJson.students = studentsData
+        // Para trazer os dados "ao contrário", ou seja, na exiibição o último elemento inserido é o primeiro a ser mostrado, pode-se usar o comando abaixo, mas o ideal é fazer direto no banco, usando a Model
+        // studentsJson.students = studentsData.reverse()
 
         return studentsJson
     } else {

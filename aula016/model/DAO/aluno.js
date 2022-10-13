@@ -60,7 +60,7 @@ const deleteStudent = async (id) => {
 // Função para retornar todos os registros de aluno no banco de dados
 const selectAllStudents = async () => {
     // Criamos um objeto do tipo Record Set para receber os dados do Banco de Dados através do script SQL select
-    const rsStudents = await prisma.$queryRaw `select * from tbl_aluno`
+    const rsStudents = await prisma.$queryRaw `select * from tbl_aluno order by id desc`
     // rs --> Record Set
         // Um select retorna um Record Set (conjunto) de dados
 
