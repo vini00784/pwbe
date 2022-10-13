@@ -7,7 +7,6 @@
 
 // Import da classe PrismaClient, que é responsável pelas interações com o Banco de Dados
 const { PrismaClient } = require('@prisma/client')
-const { transformDocument } = require('@prisma/client/runtime')
 
 // Instância da classe PrismaClient
 const prisma = new PrismaClient()
@@ -74,5 +73,6 @@ const selectAllStudents = async () => {
 }
 
 module.exports = {
+    insertStudent,
     selectAllStudents
 }
