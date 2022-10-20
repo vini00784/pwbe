@@ -15,7 +15,7 @@ const prisma = new PrismaClient()
 const insertStudent = async (student) => {
 
     try {
-        let sql = `insert into tbl_alunos (nome, 
+        let sql = `insert into tbl_aluno (nome, 
                                           foto, 
                                           sexo, 
                                           rg, 
