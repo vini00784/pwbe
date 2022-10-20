@@ -116,6 +116,42 @@ app.post('/aluno', cors(), jsonParser, async (request, response) => {
     response.json(message)
 })
 
+app.put('/updatealuno', cors(), jsonParser, async (request, response) => {
+    let statusCode
+    let message
+    let headerContentType
+
+    headerContentType = request.headers['content-type'] // Nos traz o formato de dados da requisição
+
+    // Validar se o ContentType é do tipo application/json
+    if(headerContentType == 'application/json') {
+        let bodyData = request.body
+
+        // Realiza processo de conversão de dados para conseguir identificar um JSON vazio
+        if(JSON.stringify(bodyData) != '{}') {
+            // Import do arquivo da Controller de aluno
+            const controllerAluno = require('./controller/controllerAluno.js')
+
+            // Chama a função newStudent da controller e encaminha os dados do body
+            const updatedStudent = await controllerAluno.updateStudent(bodyData)
+
+            statusCode = updatedStudent.status
+            message = updatedStudent.message
+
+        } else {
+            statusCode = 400
+            message = MESSAGE_ERROR.EMPTY_BODY
+        }
+
+    } else {
+        statusCode = 415
+        message = MESSAGE_ERROR.INCORRECT_CONTENT_TYPE
+    }
+
+    response.status(statusCode)
+    response.json(message)
+})
+
 // Ativa o servidor para receber requisições http
 app.listen(3030, () => {
     console.log('Server waiting for requests...');
