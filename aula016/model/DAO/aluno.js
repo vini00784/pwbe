@@ -55,7 +55,33 @@ const insertStudent = async (student) => {
 
 // Função para atualizar um registro de aluno no banco de dados
 const updateStudent = async (student) => {
-
+    try {
+        let sql = `update tbl_aluno set
+                   nome = '${student.nome}',
+                   foto = '${student.foto}',
+                   sexo = '${student.sexo}',
+                   rg = '${student.rg}',
+                   cpf = '${student.cpf}',
+                   email = '${student.email}',
+                   data_nascimento = '${student.data_nascimento}',
+                   telefone = '${student.telefone}',
+                   celular = '${student.celular}'
+                   where id = '${student.id}'`
+    
+                                          
+        // Executa o script SQL no BD
+        // $executeRawUnsafe --> permite encaminhar uma variável contendo o script
+        const result = await prisma.$executeRawUnsafe(sql)
+    
+        // Verifica se o script foi executado com sucesso no Banco de Dados
+        if(result) {
+            return true
+        } else {
+            return false
+        }
+    } catch (error) {
+        return false
+    }
 }
 
 // Função para deletar (ou excluir) um registro de aluno no banco de dados
@@ -80,5 +106,6 @@ const selectAllStudents = async () => {
 
 module.exports = {
     insertStudent,
+    updateStudent,
     selectAllStudents
 }
