@@ -38,7 +38,25 @@ const newStudent = async (student) => {
 
 // Função que atualiza um registro de aluno no BD
 const updateStudent = async (student) => {
+    // Validação dos campos obrigatórios
+    if(student.nome == '' || student.nome == undefined || student.foto == '' || student.foto == undefined || student.rg == '' || student.rg == undefined || student.cpf == '' || student.cpf == undefined|| student.email == '' || student.email == undefined || student.data_nascimento == '' || student.data_nascimento == undefined) {
+        return {status: 400, message: MESSAGE_ERROR.REQUIRED_FIELDS}
+    } else if(!student.email.includes('@')) { // Validação se o email digitado possui o '@'
+        return {status: 400, message: MESSAGE_ERROR.INVALID_EMAIL}
+    } else {
 
+        // Import da model de aluno
+        const updateStudent = require('../model/DAO/aluno.js')
+
+        // Chama a função para inserir um novo aluno
+        const result = await updateStudent.updateStudent(student)
+
+        if(result) {
+            return {status:201, message: MESSAGE_SUCCESS.INSERT_ITEM}
+        } else {
+            return {status: 500, message: MESSAGE_ERROR.INTERNAL_ERROR_DB}
+        }
+    }
 }
 
 // Função que delete aluno do BD
@@ -74,5 +92,6 @@ const listAllStudents = async () => {
 
 module.exports = {
     newStudent,
+    updateStudent,
     listAllStudents
 }
