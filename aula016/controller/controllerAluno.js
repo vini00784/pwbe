@@ -17,9 +17,9 @@ const newStudent = async (student) => {
 
     // Validação dos campos obrigatórios
     if(student.nome == '' || student.nome == undefined || student.foto == '' || student.foto == undefined || student.rg == '' || student.rg == undefined || student.cpf == '' || student.cpf == undefined|| student.email == '' || student.email == undefined || student.data_nascimento == '' || student.data_nascimento == undefined) {
-        return MESSAGE_ERROR.REQUIRED_FIELDS
+        return {status: 400, message: MESSAGE_ERROR.REQUIRED_FIELDS}
     } else if(!student.email.includes('@')) { // Validação se o email digitado possui o '@'
-        return MESSAGE_ERROR.INVALID_EMAIL
+        return {status: 400, message: MESSAGE_ERROR.INVALID_EMAIL}
     } else {
 
         // Import da model de aluno
@@ -29,9 +29,9 @@ const newStudent = async (student) => {
         const result = await newStudent.insertStudent(student)
 
         if(result) {
-            return true
+            return {status:201, message: MESSAGE_SUCCESS.INSERT_ITEM}
         } else {
-            return MESSAGE_ERROR.INTERNAL_ERROR_DB
+            return {status: 500, message: MESSAGE_ERROR.INTERNAL_ERROR_DB}
         }
     }
 }
