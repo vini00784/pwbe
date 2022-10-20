@@ -6,6 +6,10 @@
 */
 
 // Import das funções
+
+// Arquivo de mensagens padronizadas
+const { MESSAGE_ERROR, MESSAGE_SUCCESS } = require('../module/config.js')
+
 // const { insertStudent, selectAllStudents } = require('../model/DAO/aluno.js')
 
 // Função que gera novo aluno no BD
@@ -13,21 +17,21 @@ const newStudent = async (student) => {
 
     // Validação dos campos obrigatórios
     if(student.nome == '' || student.nome == undefined || student.foto == '' || student.foto == undefined || student.rg == '' || student.rg == undefined || student.cpf == '' || student.cpf == undefined|| student.email == '' || student.email == undefined || student.data_nascimento == '' || student.data_nascimento == undefined) {
-        return false
+        return MESSAGE_ERROR.REQUIRED_FIELDS
     } else if(!student.email.includes('@')) { // Validação se o email digitado possui o '@'
-        return false
+        return MESSAGE_ERROR.INVALID_EMAIL
     } else {
 
         // Import da model de aluno
         const newStudent = require('../model/DAO/aluno.js')
 
         // Chama a função para inserir um novo aluno
-        const result = newStudent.insertStudent(student)
+        const result = await newStudent.insertStudent(student)
 
         if(result) {
             return true
         } else {
-            return false
+            return MESSAGE_ERROR.INTERNAL_ERROR_DB
         }
     }
 }
@@ -53,9 +57,9 @@ const listAllStudents = async () => {
     if(studentsData) {
         
         // Conversão do tipo de dados BigInt para Int (DE FORMA PROVISÓRIA!)
-        studentsData.forEach(element => {
-            element.id = Number(element.id)
-        })
+        // studentsData.forEach(element => {
+        //     element.id = Number(element.id)
+        // })
 
         studentsJson.students = studentsData
         // Para trazer os dados "ao contrário", ou seja, na exiibição o último elemento inserido é o primeiro a ser mostrado, pode-se usar o comando abaixo, mas o ideal é fazer direto no banco, usando a Model
