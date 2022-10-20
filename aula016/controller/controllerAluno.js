@@ -46,13 +46,13 @@ const updateStudent = async (student) => {
     } else {
 
         // Import da model de aluno
-        const updateStudent = require('../model/DAO/aluno.js')
+        const updatedStudent = require('../model/DAO/aluno.js')
 
-        // Chama a função para inserir um novo aluno
-        const result = await updateStudent.updateStudent(student)
+        // Chama a função para atualizar um aluno
+        const result = await updatedStudent.updateStudent(student)
 
         if(result) {
-            return {status:201, message: MESSAGE_SUCCESS.INSERT_ITEM}
+            return {status:200, message: MESSAGE_SUCCESS.UPDATE_ITEM}
         } else {
             return {status: 500, message: MESSAGE_ERROR.INTERNAL_ERROR_DB}
         }
