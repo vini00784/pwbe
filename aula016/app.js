@@ -99,14 +99,8 @@ app.post('/aluno', cors(), jsonParser, async (request, response) => {
             // Chama a função newStudent da controller e encaminha os dados do body
             const newStudent = await controllerAluno.newStudent(bodyData)
 
-            if(newStudent == true) {
-                statusCode = 201
-                message = MESSAGE_SUCCESS.INSERT_ITEM
-            } else {
-                statusCode = 400
-                message = newStudent
-            }
-
+            statusCode = newStudent.status
+            message = newStudent.message
 
         } else {
             statusCode = 400
