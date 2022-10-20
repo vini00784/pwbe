@@ -13,38 +13,44 @@ const prisma = new PrismaClient()
 
 // Função para inserir um novo registro de aluno no banco de dados
 const insertStudent = async (student) => {
-    let sql = `insert into tbl_aluno (nome, 
-                                      foto, 
-                                      sexo, 
-                                      rg, 
-                                      cpf, 
-                                      email, 
-                                      data_nascimento, 
-                                      telefone, 
-                                      celular)
-                                      values (
-                                        '${student.nome}',
-                                        '${student.foto}',
-                                        '${student.sexo}',
-                                        '${student.rg}',
-                                        '${student.cpf}',
-                                        '${student.email}',
-                                        '${student.data_nascimento}',
-                                        '${student.telefone}',
-                                        '${student.celular}'
-                                      )`
 
-                                      
-    // Executa o script SQL no BD
-    // $executeRawUnsafe --> permite encaminhar uma variável contendo o script
-    const result = await prisma.$executeRawUnsafe(sql)
-
-    // Verifica se o script foi executado com sucesso no Banco de Dados
-    if(result) {
-        return true
-    } else {
+    try {
+        let sql = `insert into tbl_alunos (nome, 
+                                          foto, 
+                                          sexo, 
+                                          rg, 
+                                          cpf, 
+                                          email, 
+                                          data_nascimento, 
+                                          telefone, 
+                                          celular)
+                                          values (
+                                            '${student.nome}',
+                                            '${student.foto}',
+                                            '${student.sexo}',
+                                            '${student.rg}',
+                                            '${student.cpf}',
+                                            '${student.email}',
+                                            '${student.data_nascimento}',
+                                            '${student.telefone}',
+                                            '${student.celular}'
+                                          )`
+    
+                                          
+        // Executa o script SQL no BD
+        // $executeRawUnsafe --> permite encaminhar uma variável contendo o script
+        const result = await prisma.$executeRawUnsafe(sql)
+    
+        // Verifica se o script foi executado com sucesso no Banco de Dados
+        if(result) {
+            return true
+        } else {
+            return false
+        }
+    } catch (error) {
         return false
     }
+
 }
 
 // Função para atualizar um registro de aluno no banco de dados
@@ -60,7 +66,7 @@ const deleteStudent = async (id) => {
 // Função para retornar todos os registros de aluno no banco de dados
 const selectAllStudents = async () => {
     // Criamos um objeto do tipo Record Set para receber os dados do Banco de Dados através do script SQL select
-    const rsStudents = await prisma.$queryRaw `select * from tbl_aluno order by id desc`
+    const rsStudents = await prisma.$queryRaw `select cast(id as float) as id, nome, foto, sexo, rg, cpf, email, data_nascimento, telefone, celular from tbl_aluno order by id desc`
     // rs --> Record Set
         // Um select retorna um Record Set (conjunto) de dados
 
