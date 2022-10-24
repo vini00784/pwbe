@@ -121,9 +121,26 @@ const selectAllStudents = async () => {
 
 }
 
+// Função para retornar apenas um dos alunos com base no ID
+const selectStudentById = async (id) => {
+
+    // Variável com o acript do banco de dados
+    let sql = `select cast(id as float) as id, nome, foto, sexo, rg, cpf, email, data_nascimento, telefone, celular from tbl_aluno where id = ${id}`
+
+    // Variável que recebe os dados vindos do Banco de dados
+    const rsStudent = await prisma.$queryRawUnsafe(sql)
+
+    if(rsStudent.length > 0) {
+        return rsStudent
+    } else {
+        return false
+    }
+}
+
 module.exports = {
     insertStudent,
     updateStudent,
     deleteStudent,
-    selectAllStudents
+    selectAllStudents,
+    selectStudentById
 }
