@@ -116,7 +116,8 @@ app.post('/aluno', cors(), jsonParser, async (request, response) => {
     response.json(message)
 })
 
-app.put('/updatealuno', cors(), jsonParser, async (request, response) => {
+// Endpoint para atualizar um aluno
+app.put('/aluno/:studentId', cors(), jsonParser, async (request, response) => {
     let statusCode
     let message
     let headerContentType
@@ -125,18 +126,31 @@ app.put('/updatealuno', cors(), jsonParser, async (request, response) => {
 
     // Validar se o ContentType é do tipo application/json
     if(headerContentType == 'application/json') {
+        // Recebe o corpo da mensagem e seus conteúdo
         let bodyData = request.body
 
         // Realiza processo de conversão de dados para conseguir identificar um JSON vazio
         if(JSON.stringify(bodyData) != '{}') {
-            // Import do arquivo da Controller de aluno
-            const controllerAluno = require('./controller/controllerAluno.js')
+            // Recebe o ID enviado através da URL
+            let id = request.params.studentId
 
-            // Chama a função newStudent da controller e encaminha os dados do body
-            const updatedStudent = await controllerAluno.updateStudent(bodyData)
+            // Validação do ID
+            if(id != '' && id != undefined) {
+                // Add o ID que chegou no corpo da requisição
+                bodyData.id = id
 
-            statusCode = updatedStudent.status
-            message = updatedStudent.message
+                // Import do arquivo da Controller de aluno
+                const controllerAluno = require('./controller/controllerAluno.js')
+    
+                // Chama a função newStudent da controller e encaminha os dados do body
+                const updatedStudent = await controllerAluno.updateStudent(bodyData)
+    
+                statusCode = updatedStudent.status
+                message = updatedStudent.message
+            } else {
+                statusCode = '400'
+                message = MESSAGE_ERROR.REQUIRED_ID
+            }
 
         } else {
             statusCode = 400
