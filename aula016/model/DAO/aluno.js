@@ -86,7 +86,24 @@ const updateStudent = async (student) => {
 
 // Função para deletar (ou excluir) um registro de aluno no banco de dados
 const deleteStudent = async (id) => {
+    try {
 
+        let sql = `delete from tbl_aluno where id = ${id}`
+
+        // Executa o script SQL no BD
+            // $executeRawUnsafe --> permite encaminhar uma variável contendo o script
+        const result = await prisma.$executeRawUnsafe(sql)
+
+        // Verifica se o script foi executado com sucesso no Banco de Dados
+        if(result) {
+            return true
+        } else {
+            return false
+        }
+
+    } catch (error) {
+        return false
+    }
 }
 
 // Função para retornar todos os registros de aluno no banco de dados
@@ -107,5 +124,6 @@ const selectAllStudents = async () => {
 module.exports = {
     insertStudent,
     updateStudent,
+    deleteStudent,
     selectAllStudents
 }
