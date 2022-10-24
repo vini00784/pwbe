@@ -40,7 +40,7 @@ const newStudent = async (student) => {
 const updateStudent = async (student) => {
 
     if(student.id == '' || student.id == undefined) {
-        return {status: 400, message:MESSAGE_ERROR.REQUIRED_ID}
+        return {status: 400, message: MESSAGE_ERROR.REQUIRED_ID}
     }
     // Validação dos campos obrigatórios
     else if(student.nome == '' || student.nome == undefined || student.foto == '' || student.foto == undefined || student.rg == '' || student.rg == undefined || student.cpf == '' || student.cpf == undefined|| student.email == '' || student.email == undefined || student.data_nascimento == '' || student.data_nascimento == undefined) {
@@ -63,9 +63,24 @@ const updateStudent = async (student) => {
     }
 }
 
-// Função que delete aluno do BD
+// Função que deleta aluno do BD
 const deleteStudent = async (id) => {
+    // Validação do ID
+    if(id != '' && id != undefined) {
+        // Import da model do aluno
+        const deletedStudent = require('../model/DAO/aluno.js')
 
+        // Chama a função para excluir um aluno
+        const result = await deletedStudent.deleteStudent(id)
+
+        if(result) {
+            return {status: 200, message: MESSAGE_SUCCESS.DELETE_ITEM}
+        } else {
+            return {status: 500, message: MESSAGE_ERROR.INTERNAL_ERROR_DB}
+        }
+    } else {
+        return {status: 400, message: MESSAGE_ERROR.REQUIRED_ID}
+    }
 }
 
 // Função que lista os alunos registrados no BD
@@ -97,5 +112,6 @@ const listAllStudents = async () => {
 module.exports = {
     newStudent,
     updateStudent,
+    deleteStudent,
     listAllStudents
 }
