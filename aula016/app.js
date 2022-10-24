@@ -56,9 +56,6 @@ app.get('/alunos', cors(), async (request, response) => {
     let statusCode
     let message
 
-    // Import do arquivo controllerAluno
-    const controllerAluno = require('./controller/controllerAluno.js')
-
     // Retorna todos os alunos existentes no banco de dados
     const studentsData = await controllerAluno.listAllStudents()
 
@@ -162,6 +159,7 @@ app.put('/aluno/:studentId', cors(), jsonParser, async (request, response) => {
     response.json(message)
 })
 
+//Endpoint para deletar um aluno
 app.delete('/aluno/:studentId', cors(), jsonParser, async (request, response) => {
     let statusCode
     let message
@@ -184,6 +182,32 @@ app.delete('/aluno/:studentId', cors(), jsonParser, async (request, response) =>
 
     response.status(statusCode)
     response.json(message)
+})
+
+// Endpoint para buscar um aluno pelo ID
+app.get('/aluno/:studentId', cors(), async (request, response) => {
+    let statusCode
+    let message
+    let id = request.params.studentId
+
+    if(id != '' && id != undefined) {
+        const studentData = await controllerAluno.searchStudentById(id)
+    
+        if(studentData) {
+            statusCode = 200
+            message = studentData
+        } else {
+            statusCode = 404
+            message = MESSAGE_ERROR.NOT_FOUND_DB
+        }
+    } else {
+        statusCode = 400
+        message = MESSAGE_ERROR.REQUIRED_ID
+    }
+
+    response.status(statusCode)
+    response.json(message)
+
 })
 
 // Ativa o servidor para receber requisições http
