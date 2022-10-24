@@ -28,7 +28,8 @@ const bodyParser = require('body-parser')
 // Arquivo de mensagens padronizadas
 const { MESSAGE_ERROR, MESSAGE_SUCCESS } = require('./module/config.js')
 
-// Import das Funções
+// Import do arquivo da Controller de aluno
+const controllerAluno = require('./controller/controllerAluno.js')
 
 const app = express()
 
@@ -93,8 +94,6 @@ app.post('/aluno', cors(), jsonParser, async (request, response) => {
 
         // Realiza processo de conversão de dados para conseguir identificar um JSON vazio
         if(JSON.stringify(bodyData) != '{}') {
-            // Import do arquivo da Controller de aluno
-            const controllerAluno = require('./controller/controllerAluno.js')
 
             // Chama a função newStudent da controller e encaminha os dados do body
             const newStudent = await controllerAluno.newStudent(bodyData)
