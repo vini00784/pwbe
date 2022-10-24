@@ -38,8 +38,12 @@ const newStudent = async (student) => {
 
 // Função que atualiza um registro de aluno no BD
 const updateStudent = async (student) => {
+
+    if(student.id == '' || student.id == undefined) {
+        return {status: 400, message:MESSAGE_ERROR.REQUIRED_ID}
+    }
     // Validação dos campos obrigatórios
-    if(student.nome == '' || student.nome == undefined || student.foto == '' || student.foto == undefined || student.rg == '' || student.rg == undefined || student.cpf == '' || student.cpf == undefined|| student.email == '' || student.email == undefined || student.data_nascimento == '' || student.data_nascimento == undefined || student.id == '' || student.id == undefined) {
+    else if(student.nome == '' || student.nome == undefined || student.foto == '' || student.foto == undefined || student.rg == '' || student.rg == undefined || student.cpf == '' || student.cpf == undefined|| student.email == '' || student.email == undefined || student.data_nascimento == '' || student.data_nascimento == undefined) {
         return {status: 400, message: MESSAGE_ERROR.REQUIRED_FIELDS}
     } else if(!student.email.includes('@')) { // Validação se o email digitado possui o '@'
         return {status: 400, message: MESSAGE_ERROR.INVALID_EMAIL}
