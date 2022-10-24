@@ -11,7 +11,8 @@ const MESSAGE_ERROR = {
     INCORRECT_CONTENT_TYPE: 'O cabeçalho da requisição não possui um Content-Type válido!',
     EMPTY_BODY: 'O body da requisição não pode ser vazio',
     NOT_FOUND_DB: 'Não foram encontrados registros no Banco de Dados!',
-    INTERNAL_ERROR_DB: 'Não foi possível realizar a operação com o banco de dados'
+    INTERNAL_ERROR_DB: 'Não foi possível realizar a operação com o banco de dados',
+    REQUIRED_ID: 'O id do registro é obrigatório neste tipo de requisição!'
 }
 
 const MESSAGE_SUCCESS = {
