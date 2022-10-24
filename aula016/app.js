@@ -137,11 +137,8 @@ app.put('/aluno/:studentId', cors(), jsonParser, async (request, response) => {
             if(id != '' && id != undefined) {
                 // Add o ID que chegou no corpo da requisição
                 bodyData.id = id
-
-                // Import do arquivo da Controller de aluno
-                const controllerAluno = require('./controller/controllerAluno.js')
     
-                // Chama a função newStudent da controller e encaminha os dados do body
+                // Chama a função updateStudent da controller e encaminha os dados do body
                 const updatedStudent = await controllerAluno.updateStudent(bodyData)
     
                 statusCode = updatedStudent.status
@@ -159,6 +156,30 @@ app.put('/aluno/:studentId', cors(), jsonParser, async (request, response) => {
     } else {
         statusCode = 415
         message = MESSAGE_ERROR.INCORRECT_CONTENT_TYPE
+    }
+
+    response.status(statusCode)
+    response.json(message)
+})
+
+app.delete('/aluno/:studentId', cors(), jsonParser, async (request, response) => {
+    let statusCode
+    let message
+        
+    // Recebe o ID enviado através da URL
+    let id = request.params.studentId
+
+    // Validação do ID
+    if(id != '' && id != undefined) {
+    
+        // Chama a função deleteStudent da controller e exclui o dado informado pelo ID
+        const deletedStudent = await controllerAluno.deleteStudent(id)
+    
+        statusCode = deletedStudent.status
+        message = deletedStudent.message
+    } else {
+        statusCode = '400'
+        message = MESSAGE_ERROR.REQUIRED_ID
     }
 
     response.status(statusCode)
