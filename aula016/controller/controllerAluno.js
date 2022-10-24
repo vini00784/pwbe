@@ -106,12 +106,31 @@ const listAllStudents = async () => {
     } else {
         return false
     }
+}
 
+const searchStudentById = async (id) => {
+    let studentJson = {}
+
+    const { selectStudentById } = require('../model/DAO/aluno.js')
+
+    const studentData = await selectStudentById(id)
+
+    if(id != '' && id != undefined) {
+
+        if(studentData) {
+            studentJson.student = studentData
+            return studentJson
+        }
+
+    } else {
+        return MESSAGE_ERROR.NOT_FOUND_DB
+    }
 }
 
 module.exports = {
     newStudent,
     updateStudent,
     deleteStudent,
-    listAllStudents
+    listAllStudents,
+    searchStudentById
 }
