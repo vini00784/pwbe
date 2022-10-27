@@ -238,7 +238,7 @@ app.get('/v1/cursos', cors(), async (request, response) => {
     response.json(message)
 })
 
-app.post('v1/curso', cors(), jsonParser, async (request, response) => {
+app.post('/v1/curso', cors(), jsonParser, async (request, response) => {
     let statusCode
     let message
     let headerContentType
