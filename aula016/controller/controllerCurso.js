@@ -6,6 +6,7 @@
 */
 
 const { MESSAGE_ERROR, MESSAGE_SUCCESS } = require('../module/config.js')
+const { newStudent } = require('./controllerAluno.js')
 
 const newCourse = async (course) => {
     if(course.nome == '' || course.nome == undefined || course.carga_horaria == '' || course.carga_horaria == undefined) {
@@ -23,8 +24,22 @@ const newCourse = async (course) => {
     }
 }
 
-const updateCourse = async () => {
+const updateCourse = async (course) => {
+    if(course.id == '' || course.id == undefined) {
+        return {status: 400, message: MESSAGE_ERROR.REQUIRED_ID}
+    } else if(course.nome == '' || course.nome == undefined || course.carga_horaria == '' || course.carga_horaria == undefined) {
+        return {status: 400, message: MESSAGE_ERROR.REQUIRED_FIELDS}
+    } else {
+        const updatedCourse = require('../model/DAO/curso.js')
 
+        const result = await updatedCourse.updateCourse(course)
+
+        if(result) {
+            return {status: 200, message: MESSAGE_SUCCESS.UPDATE_ITEM}
+        } else {
+            return {status: 500, message: MESSAGE_ERROR.INTERNAL_ERROR_DB}
+        }
+    }
 }
 
 const deleteCourse = async () => {
@@ -52,5 +67,6 @@ const searchCourseById = async () => {
 
 module.exports = {
     newCourse,
+    updateCourse,
     listAllCourses
 }
