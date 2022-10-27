@@ -70,14 +70,23 @@ const deleteStudent = async (id) => {
         // Import da model do aluno
         const deletedStudent = require('../model/DAO/aluno.js')
 
-        // Chama a função para excluir um aluno
-        const result = await deletedStudent.deleteStudent(id)
+        // Validação do ID no Banco de Dados
+        const searchStudent = await searchStudentById(id)
 
-        if(result) {
-            return {status: 200, message: MESSAGE_SUCCESS.DELETE_ITEM}
+        // Valida se o registro é válido
+        if(searchStudent) {
+            // Chama a função para excluir um aluno
+            const result = await deletedStudent.deleteStudent(id)
+    
+            if(result) {
+                return {status: 200, message: MESSAGE_SUCCESS.DELETE_ITEM}
+            } else {
+                return {status: 500, message: MESSAGE_ERROR.INTERNAL_ERROR_DB}
+            }
         } else {
-            return {status: 500, message: MESSAGE_ERROR.INTERNAL_ERROR_DB}
+            return {status: 404, message: MESSAGE_ERROR.NOT_FOUND_DB}
         }
+
     } else {
         return {status: 400, message: MESSAGE_ERROR.REQUIRED_ID}
     }
@@ -120,10 +129,12 @@ const searchStudentById = async (id) => {
         if(studentData) {
             studentJson.student = studentData
             return studentJson
+        } else {
+            return false
         }
 
     } else {
-        return MESSAGE_ERROR.NOT_FOUND_DB
+        return {status: 400, message: MESSAGE_ERROR.NOT_FOUND_DB}
     }
 }
 
