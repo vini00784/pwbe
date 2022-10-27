@@ -32,7 +32,18 @@ const deleteCourse = async () => {
 }
 
 const listAllCourses = async () => {
+    let coursesJson = {}
 
+    const { selectAllCourses } = require('../model/DAO/curso.js')
+
+    const coursesData = await selectAllCourses()
+
+    if(coursesData) {
+        coursesJson.courses = coursesData
+        return coursesJson
+    } else {
+        return false
+    }
 }
 
 const searchCourseById = async () => {
