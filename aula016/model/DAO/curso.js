@@ -44,7 +44,7 @@ const updateCourse = async (course) => {
                    where id = '${course.id}'`
 
         const result = await prisma.$executeRawUnsafe(sql)
-        
+
         if(result) {
             return true
         } else {
@@ -55,8 +55,21 @@ const updateCourse = async (course) => {
     }
 }
 
-const deleteCourse = async () => {
+const deleteCourse = async (id) => {
+    try {
+        let sql = `delete from tbl_curso where id = ${id}`
 
+        const result = await $executeRawUnsafe(sql)
+
+        if(result) {
+            return true
+        } else {
+            return false
+        }
+
+    } catch (error) {
+        return false
+    }
 }
 
 const selectAllCourses = async () => {
@@ -78,5 +91,6 @@ const selectCourseById = async () => {
 module.exports = {
     insertCourse,
     updateCourse,
+    deleteCourse,
     selectAllCourses
 }
