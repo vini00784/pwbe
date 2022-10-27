@@ -308,7 +308,23 @@ app.put('/v1/curso/:courseId', cors(), jsonParser, async (request, response) => 
 })
 
 app.delete('/v1/curso/:courseId', cors(), jsonParser, async(request, response) => {
-    
+    let statusCode
+    let message
+
+    let id = request.params.courseId
+
+    if(id != '' && id != undefined) {
+        const deletedCourse = await controllerCurso.deleteCourse(id)
+
+        statusCode = deletedCourse.status
+        message = deletedCourse.message
+    } else {
+        statusCode = 400
+        message = MESSAGE_ERROR.REQUIRED_ID
+    }
+
+    response.status(statusCode)
+    response.json(message)
 })
 
 app.get('/v1/curso/:courseId', cors(), async(request, response) => {
