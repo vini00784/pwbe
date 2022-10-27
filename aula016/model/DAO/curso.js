@@ -59,14 +59,14 @@ const deleteCourse = async (id) => {
     try {
         let sql = `delete from tbl_curso where id = ${id}`
 
-        const result = await $executeRawUnsafe(sql)
+        const result = await prisma.$executeRawUnsafe(sql)
 
         if(result) {
             return true
         } else {
             return false
         }
-
+        
     } catch (error) {
         return false
     }
