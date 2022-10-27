@@ -44,7 +44,27 @@ const updateCourse = async (course) => {
 
 const deleteCourse = async (id) => {
     
-    
+    if(id != '' && id != undefined) {
+        const deletedCourse = require('../model/DAO/curso.js')
+
+        const searchCourse = await searchCourseById(id)
+
+        if(searchCourse) {
+            
+            const result = await deletedCourse.deleteCourse(id)
+
+            if(result) {
+                return {status: 200, message: MESSAGE_SUCCESS.DELETE_ITEM}
+            } else {
+                return {status: 500, message: MESSAGE_ERROR.INTERNAL_ERROR_DB}
+            }
+        } else {
+            return {status: 404, message: MESSAGE_ERROR.NOT_FOUND_DB}
+        }
+
+    } else {
+        return {status: 400, message: MESSAGE_ERROR.REQUIRED_ID}
+    }
 
 }
 
@@ -87,5 +107,7 @@ const searchCourseById = async (id) => {
 module.exports = {
     newCourse,
     updateCourse,
-    listAllCourses
+    deleteCourse,
+    listAllCourses,
+    searchCourseById
 }
