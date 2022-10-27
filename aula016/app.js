@@ -32,6 +32,8 @@ const { MESSAGE_ERROR, MESSAGE_SUCCESS } = require('./module/config.js')
 const controllerAluno = require('./controller/controllerAluno.js')
 const controllerCurso = require('./controller/controllerCurso.js')
 const { json } = require('body-parser')
+const { response } = require('express')
+const e = require('express')
 
 const app = express()
 
@@ -299,6 +301,34 @@ app.put('/v1/curso/:courseId', cors(), jsonParser, async (request, response) => 
     } else {
         statusCode = 415
         message = MESSAGE_ERROR.INCORRECT_CONTENT_TYPE
+    }
+
+    response.status(statusCode)
+    response.json(message)
+})
+
+app.delete('/v1/curso/:courseId', cors(), jsonParser, async(request, response) => {
+    
+})
+
+app.get('/v1/curso/:courseId', cors(), async(request, response) => {
+    let statusCode
+    let message
+    let id = request.params.courseId
+
+    if(id != '' && id != undefined) {
+        const courseData = await controllerCurso.searchCourseById(id)
+
+        if(courseData) {
+            statusCode = 200
+            message = courseData
+        } else {
+            statusCode = 404
+            message = MESSAGE_ERROR.NOT_FOUND_DB
+        }
+    } else {
+        statusCode = 400
+        message = MESSAGE_ERROR.REQUIRED_ID
     }
 
     response.status(statusCode)
