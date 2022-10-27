@@ -6,7 +6,6 @@
 */
 
 const { MESSAGE_ERROR, MESSAGE_SUCCESS } = require('../module/config.js')
-const { newStudent } = require('./controllerAluno.js')
 
 const newCourse = async (course) => {
     if(course.nome == '' || course.nome == undefined || course.carga_horaria == '' || course.carga_horaria == undefined) {
@@ -50,7 +49,7 @@ const deleteCourse = async (id) => {
         const searchCourse = await searchCourseById(id)
 
         if(searchCourse) {
-            
+
             const result = await deletedCourse.deleteCourse(id)
 
             if(result) {
