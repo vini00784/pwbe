@@ -42,7 +42,9 @@ const updateCourse = async (course) => {
     }
 }
 
-const deleteCourse = async () => {
+const deleteCourse = async (id) => {
+    
+    
 
 }
 
@@ -61,8 +63,25 @@ const listAllCourses = async () => {
     }
 }
 
-const searchCourseById = async () => {
+const searchCourseById = async (id) => {
+    let courseJson = {}
 
+    const { selectCourseById } = require('../model/DAO/curso.js')
+
+    const courseData = await selectCourseById(id)
+
+    if(id != '' && id != undefined) {
+
+        if(courseData) {
+            courseJson.course = courseData
+            return courseJson
+        } else {
+            return false
+        }
+
+    } else {
+        return {status: 400, message: MESSAGE_ERROR.NOT_FOUND_DB}
+    }
 }
 
 module.exports = {
