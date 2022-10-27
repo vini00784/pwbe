@@ -40,11 +40,11 @@ const updateCourse = async (course) => {
                    nome = '${course.nome}',
                    carga_horaria = '${course.carga_horaria}',
                    icone = '${course.icone}',
-                   'sigla = '${course.sigla}'
+                   sigla = '${course.sigla}'
                    where id = '${course.id}'`
 
         const result = await prisma.$executeRawUnsafe(sql)
-
+        
         if(result) {
             return true
         } else {
