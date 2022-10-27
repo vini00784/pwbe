@@ -10,7 +10,28 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
 const insertCourse = async (course) => {
-    
+    try {
+        let sql = `insert into tbl_curso (nome,
+                                          carga_horaria,
+                                          icone,
+                                          sigla)
+                                          values (
+                                            '${course.nome}',
+                                            '${course.carga_horaria}',
+                                            '${course.icone}',
+                                            '${course.sigla}'
+                                          )`
+
+        const result = await prisma.$executeRawUnsafe(sql)
+
+        if(result) {
+            return true
+        } else {
+            return false
+        }
+    } catch (error) {
+        return false
+    }
 }
 
 const updateCourse = async () => {
