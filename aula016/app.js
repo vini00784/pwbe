@@ -50,6 +50,8 @@ const jsonParser = bodyParser.json()
     Data: 10/10/2022
 */
 
+/* ENDPOINTS PARA OS ALUNOS */ 
+
 // EndPoint para listagem de todos os alunos
 app.get('/v1/alunos', cors(), async (request, response) => {
 
@@ -209,6 +211,14 @@ app.get('/v1/aluno/:studentId', cors(), async (request, response) => {
     response.json(message)
 
 })
+
+/* ENDPOINTS PARA OS ALUNOS */ 
+
+/***************************************************************************/
+
+/* ENDPOINTS PARA OS CURSOS */
+
+/* ENDPOINTS PARA OS CURSOS */
 
 // Ativa o servidor para receber requisições http
 app.listen(3030, () => {
