@@ -30,6 +30,7 @@ const { MESSAGE_ERROR, MESSAGE_SUCCESS } = require('./module/config.js')
 
 // Import do arquivo da Controller de aluno
 const controllerAluno = require('./controller/controllerAluno.js')
+const controllerCurso = require('./controller/controllerCurso.js')
 
 const app = express()
 
@@ -217,6 +218,24 @@ app.get('/v1/aluno/:studentId', cors(), async (request, response) => {
 /***************************************************************************/
 
 /* ENDPOINTS PARA OS CURSOS */
+
+app.get('/v1/cursos', cors(), async (request, response) => {
+    let statusCode
+    let message
+
+    const coursesData = await controllerCurso.listAllCourses()
+
+    if(coursesData) {
+        statusCode = 200
+        message = coursesData
+    } else {
+        statusCode = 404
+        message = MESSAGE_ERROR.NOT_FOUND_DB
+    }
+
+    response.status(statusCode)
+    response.json(message)
+})
 
 /* ENDPOINTS PARA OS CURSOS */
 
