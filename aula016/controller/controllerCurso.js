@@ -51,5 +51,6 @@ const searchCourseById = async () => {
 }
 
 module.exports = {
-    newCourse
+    newCourse,
+    listAllCourses
 }
