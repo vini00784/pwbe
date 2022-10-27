@@ -268,6 +268,43 @@ app.post('/v1/curso', cors(), jsonParser, async (request, response) => {
     response.json(message)
 })
 
+app.put('/v1/curso/:courseId', cors(), jsonParser, async (request, response) => {
+    let statusCode
+    let message
+    let headerContentType
+
+    headerContentType = request.headers['content-type']
+
+    if(headerContentType == 'application/json') {
+        let bodyData = request.body
+
+        if(JSON.stringify(bodyData) != '{}') {
+            let id = request.params.courseId
+
+            if(id != '' && id != undefined) {
+                bodyData.id = id
+
+                const updatedCourse = await controllerCurso.updateCourse(bodyData)
+
+                statusCode = updatedCourse.status
+                message = updatedCourse.message
+            } else {
+                statusCode = 400
+                message = MESSAGE_ERROR.REQUIRED_ID
+            }
+        } else {
+            statusCode = 400
+            message = MESSAGE_ERROR.EMPTY_BODY
+        }
+    } else {
+        statusCode = 415
+        message = MESSAGE_ERROR.INCORRECT_CONTENT_TYPE
+    }
+
+    response.status(statusCode)
+    response.json(message)
+})
+
 /* ENDPOINTS PARA OS CURSOS */
 
 // Ativa o servidor para receber requisições http
