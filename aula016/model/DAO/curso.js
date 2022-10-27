@@ -75,22 +75,31 @@ const deleteCourse = async (id) => {
 const selectAllCourses = async () => {
     let sql = 'select cast(id as float) as id, nome, carga_horaria, icone, sigla from tbl_curso order by id desc'
 
-    const rsCourses = await prisma.$queryRawUnsafe(sql)
+    const rsCourse = await prisma.$queryRawUnsafe(sql)
 
-    if(rsCourses.length > 0) {
-        return rsCourses
+    if(rsCourse.length > 0) {
+        return rsCourse
     } else {
         return false
     }
 }
 
-const selectCourseById = async () => {
+const selectCourseById = async (id) => {
+    let sql = `select cast(id as float) as id, nome, carga_horaria, icone, sigla from tbl_curso where id = ${id}`
 
+    const rsCourse = await prisma.$queryRawUnsafe(sql)
+
+    if(rsCourse.length > 0) {
+        return rsCourse
+    } else {
+        return false
+    }
 }
 
 module.exports = {
     insertCourse,
     updateCourse,
     deleteCourse,
-    selectAllCourses
+    selectAllCourses,
+    selectCourseById
 }
