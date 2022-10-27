@@ -59,5 +59,6 @@ const selectCourseById = async () => {
 }
 
 module.exports = {
-    insertCourse
+    insertCourse,
+    selectAllCourses
 }
