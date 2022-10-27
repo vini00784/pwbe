@@ -51,7 +51,7 @@ const jsonParser = bodyParser.json()
 */
 
 // EndPoint para listagem de todos os alunos
-app.get('/alunos', cors(), async (request, response) => {
+app.get('/v1/alunos', cors(), async (request, response) => {
 
     let statusCode
     let message
@@ -78,7 +78,7 @@ app.get('/alunos', cors(), async (request, response) => {
 })
 
 // EndPoint para inserir um novo aluno
-app.post('/aluno', cors(), jsonParser, async (request, response) => {
+app.post('/v1/aluno', cors(), jsonParser, async (request, response) => {
     let statusCode
     let message
     let headerContentType
@@ -113,7 +113,7 @@ app.post('/aluno', cors(), jsonParser, async (request, response) => {
 })
 
 // Endpoint para atualizar um aluno
-app.put('/aluno/:studentId', cors(), jsonParser, async (request, response) => {
+app.put('/v1/aluno/:studentId', cors(), jsonParser, async (request, response) => {
     let statusCode
     let message
     let headerContentType
@@ -160,7 +160,7 @@ app.put('/aluno/:studentId', cors(), jsonParser, async (request, response) => {
 })
 
 //Endpoint para deletar um aluno
-app.delete('/aluno/:studentId', cors(), jsonParser, async (request, response) => {
+app.delete('/v1/aluno/:studentId', cors(), jsonParser, async (request, response) => {
     let statusCode
     let message
         
@@ -185,7 +185,7 @@ app.delete('/aluno/:studentId', cors(), jsonParser, async (request, response) =>
 })
 
 // Endpoint para buscar um aluno pelo ID
-app.get('/aluno/:studentId', cors(), async (request, response) => {
+app.get('/v1/aluno/:studentId', cors(), async (request, response) => {
     let statusCode
     let message
     let id = request.params.studentId
