@@ -77,10 +77,10 @@ const deleteCourse = async (id) => {
 const selectAllCourses = async () => {
     let sql = 'select cast(id as float) as id, nome, carga_horaria, icone, sigla from tbl_curso order by id desc'
 
-    const rsCourse = await prisma.$queryRawUnsafe(sql)
+    const rsCourses = await prisma.$queryRawUnsafe(sql)
 
-    if(rsCourse.length > 0) {
-        return rsCourse
+    if(rsCourses.length > 0) {
+        return rsCourses
     } else {
         return false
     }
