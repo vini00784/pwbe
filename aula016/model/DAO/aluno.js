@@ -7,6 +7,7 @@
 
 // Import da classe PrismaClient, que é responsável pelas interações com o Banco de Dados
 const { PrismaClient } = require('@prisma/client')
+const { query } = require('express')
 
 // Instância da classe PrismaClient
 const prisma = new PrismaClient()
@@ -137,10 +138,27 @@ const selectStudentById = async (id) => {
     }
 }
 
+// Função para retornar o último ID de aluno gerado no banco
+const selectLastId = async () => {
+
+    // Script para buscar o último ID gerado no banco de dados
+    let sql = 'select cast (id as float) as id from tbl_aluno order by id desc limit 1'
+
+    const lastId = await prisma.$queryRawUnsafe(sql)
+    
+    if(lastId.legth > 0) {
+        return true
+    } else {
+        return false
+    }
+
+}
+
 module.exports = {
     insertStudent,
     updateStudent,
     deleteStudent,
     selectAllStudents,
-    selectStudentById
+    selectStudentById,
+    selectLastId
 }
