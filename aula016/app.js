@@ -31,9 +31,6 @@ const { MESSAGE_ERROR, MESSAGE_SUCCESS } = require('./module/config.js')
 // Import do arquivo da Controller de aluno
 const controllerAluno = require('./controller/controllerAluno.js')
 const controllerCurso = require('./controller/controllerCurso.js')
-const { json } = require('body-parser')
-const { response } = require('express')
-const e = require('express')
 
 const app = express()
 
