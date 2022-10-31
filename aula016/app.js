@@ -220,8 +220,14 @@ app.get('/v1/aluno/:studentId', cors(), async (request, response) => {
 
 /***************************************************************************/
 
+/* 
+    Rotas para CRUD de cursos
+    Data: 27/10/2022
+*/
+
 /* ENDPOINTS PARA OS CURSOS */
 
+// EndPoint para listagem de todos os cursos
 app.get('/v1/cursos', cors(), async (request, response) => {
     let statusCode
     let message
@@ -240,6 +246,7 @@ app.get('/v1/cursos', cors(), async (request, response) => {
     response.json(message)
 })
 
+//EndPoint para inserir um novo curso
 app.post('/v1/curso', cors(), jsonParser, async (request, response) => {
     let statusCode
     let message
@@ -270,6 +277,7 @@ app.post('/v1/curso', cors(), jsonParser, async (request, response) => {
     response.json(message)
 })
 
+// EndPoint para atualizar um curso
 app.put('/v1/curso/:courseId', cors(), jsonParser, async (request, response) => {
     let statusCode
     let message
@@ -307,6 +315,7 @@ app.put('/v1/curso/:courseId', cors(), jsonParser, async (request, response) => 
     response.json(message)
 })
 
+// EndPoint para deletar um curso
 app.delete('/v1/curso/:courseId', cors(), jsonParser, async(request, response) => {
     let statusCode
     let message
@@ -327,6 +336,7 @@ app.delete('/v1/curso/:courseId', cors(), jsonParser, async(request, response) =
     response.json(message)
 })
 
+//EndPoint para buscar um curso pelo ID
 app.get('/v1/curso/:courseId', cors(), async(request, response) => {
     let statusCode
     let message
