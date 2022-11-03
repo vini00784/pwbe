@@ -25,11 +25,46 @@ const newStudent = async (student) => {
         // Import da model de aluno
         const newStudent = require('../model/DAO/aluno.js')
 
-        // Chama a função para inserir um novo aluno
-        const result = await newStudent.insertStudent(student)
+        // Import da model do aluno_curso (tabela de relação entre aluno e curso)
+        const newStudentCourse = require('../model/DAO/aluno_curso.js')
 
-        if(result) {
-            return {status:201, message: MESSAGE_SUCCESS.INSERT_ITEM}
+        // Chama a função para inserir um novo aluno
+        const resultNewStudent = await newStudent.insertStudent(student)
+
+        // Verifica se os dados do novo aluno foram inseridos no banco de dados
+        if(resultNewStudent) {
+
+            // Chama a função que verifica qual o ID gerado para o novo aluno
+            let newStudentId = await newStudent.selectLastId()
+
+            if(newStudentId > 0) {
+                let studentCourse = {} // Objeto JSON para aluno_curso
+
+                let anoMatricula = new Date().getFullYear() // Retorna o ano corrente
+
+                let numeroMatricula = `${newStudentId}${student.curso[0].id_curso}${anoMatricula}` // Gera a matrícula do aluno (id_aluno + id_curso + ano corrente)
+
+                // Inserindo as chaves e os valores no objeto JSON
+                studentCourse.id_aluno = newStudentId
+                studentCourse.id_curso = student.curso[0].id_curso
+                studentCourse.matricula = numeroMatricula
+                studentCourse.status_aluno = 'Cursando'
+
+                // Chama a função para inserir na tbl_aluno_curso
+                const resultNewStudentCourse = await newStudentCourse.insertStudentCourse(studentCourse)
+
+                if(resultNewStudentCourse) {
+                    return {status:201, message: MESSAGE_SUCCESS.INSERT_ITEM}
+                } else {
+                    // Caso aconteça um erro neste processo, obrigatoriamente deverá ser excluído do BD esse registro, já que, no caso de um erro, ele seria inserido em uma tabela mas em outra não, sendo um processamento feito pela metade
+                    await deleteStudent(newStudentId)
+                    return {status: 500, message: MESSAGE_ERROR.INTERNAL_ERROR_DB}
+                }
+
+            } else {
+                await deleteStudent(newStudentId)
+                return {status: 500, message: MESSAGE_ERROR.INTERNAL_ERROR_DB}
+            }
         } else {
             return {status: 500, message: MESSAGE_ERROR.INTERNAL_ERROR_DB}
         }
