@@ -5,6 +5,12 @@
     Versão:       1.0
 */
 
+// Import da classe PrismaClient, que é responsável pelas interações com o Banco de Dados
+const { PrismaClient } = require('@prisma/client')
+
+// Instância da classe PrismaClient
+const prisma = new PrismaClient()
+
 // Função para inserir um novo registro no banco de dados
 const insertStudentCourse = async (studentCourse) => {
 
