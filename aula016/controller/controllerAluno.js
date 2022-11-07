@@ -128,46 +128,71 @@ const deleteStudent = async (id) => {
 }
 
 // Função que lista os alunos registrados no BD
-const listAllStudents = async () => {
-    let studentsJson = {}
+// const listAllStudents = async () => {
+//     let studentsJson = {}
+//     let studentCourseJson = {}
 
-    const { selectAllStudents } = require('../model/DAO/aluno.js')
-
-    const studentsData = await selectAllStudents()
+//     const { selectAllStudents } = require('../model/DAO/aluno.js')
     
-    if(studentsData) {
+//     const studentsData = await selectAllStudents()
+    
+//     if(studentsData) {
+//         const { selectStudentCourse } = require('../model/DAO/aluno_curso.js')
+//         const studentCourseData = await selectStudentCourse(studentsData.id)
         
-        // Conversão do tipo de dados BigInt para Int (DE FORMA PROVISÓRIA!)
-        // studentsData.forEach(element => {
-        //     element.id = Number(element.id)
-        // })
+//         // Conversão do tipo de dados BigInt para Int (DE FORMA PROVISÓRIA!)
+//         // studentsData.forEach(element => {
+//         //     element.id = Number(element.id)
+//         // })
 
-        studentsJson.students = studentsData
-        // Para trazer os dados "ao contrário", ou seja, na exiibição o último elemento inserido é o primeiro a ser mostrado, pode-se usar o comando abaixo, mas o ideal é fazer direto no banco, usando a Model
-        // studentsJson.students = studentsData.reverse()
+//         studentCourseData.forEach(element => {
+//             studentCourseJson.courses = element
+//             studentsJson.students = studentsData
+//             studentsJson.courses = studentCourseJson
+//         });
 
-        return studentsJson
-    } else {
-        return false
-    }
-}
+//         // Para trazer os dados "ao contrário", ou seja, na exiibição o último elemento inserido é o primeiro a ser mostrado, pode-se usar o comando abaixo, mas o ideal é fazer direto no banco, usando a Model
+//         // studentsJson.students = studentsData.reverse()
+
+//         return studentsJson
+//     } else {
+//         return false
+//     }
+// }
 
 const searchStudentById = async (id) => {
     let studentJson = {}
 
+    // Import das models aluno e aluno_curso
     const { selectStudentById } = require('../model/DAO/aluno.js')
+    const { selectStudentCourse } = require('../model/DAO/aluno_curso.js')
 
     const studentData = await selectStudentById(id)
 
     if(id != '' && id != undefined) {
-
+        
         if(studentData) {
-            studentJson.student = studentData
-            return studentJson
-        } else {
-            return false
-        }
 
+            // Busca os dados referentes ao curso do aluno
+            const studentCourseData = await selectStudentCourse(id)
+            
+            if(studentCourseData) {
+                
+                // Chave no JSON que retorna o array de aluno
+                studentJson.student = studentData
+
+                // Adiciona a chave course dentro do objeto dos dados do aluno e insere os dados do curso referente ao aluno
+                studentData[0].course = studentCourseData
+
+                return studentJson
+            } else {
+                // Chave no JSON que retorna o array de aluno
+                studentJson.student = studentData
+    
+                return studentJson
+            }
+
+        }
     } else {
         return {status: 400, message: MESSAGE_ERROR.NOT_FOUND_DB}
     }
