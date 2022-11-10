@@ -128,37 +128,40 @@ const deleteStudent = async (id) => {
 }
 
 // Função que lista os alunos registrados no BD
-// const listAllStudents = async () => {
-//     let studentsJson = {}
-//     let studentCourseJson = {}
+const listAllStudents = async () => {
+    let studentsJson = {}
 
-//     const { selectAllStudents } = require('../model/DAO/aluno.js')
+    // Import das models
+    const { selectAllStudents } = require('../model/DAO/aluno.js')
+    const { selectStudentCourse } = require('../model/DAO/aluno_curso.js')
     
-//     const studentsData = await selectAllStudents()
+    // Busca todos os alunos
+    const studentsData = await selectAllStudents()
     
-//     if(studentsData) {
-//         const { selectStudentCourse } = require('../model/DAO/aluno_curso.js')
-//         const studentCourseData = await selectStudentCourse(studentsData.id)
+    if(studentsData) {
+
+        // Faz a varredura da chave 'students' de dentro do studentsData
+        const studentCourseArray = studentsData.map(async studentItem => {
         
-//         // Conversão do tipo de dados BigInt para Int (DE FORMA PROVISÓRIA!)
-//         // studentsData.forEach(element => {
-//         //     element.id = Number(element.id)
-//         // })
+            // Busca os dados referentes ao curso do aluno
+            const studentCourseData = await selectStudentCourse(studentItem.id)
+            
+            if(studentCourseData) {
+                // Cria a a chave 'curso' e coloca os dados do curso dentro dela
+                studentItem.curso = studentCourseData
+            }
+            
+            return studentItem
+        });
+        // console.log(await Promise.all(studentCourseArray));
+        studentsJson.students = await Promise.all(studentCourseArray)
 
-//         studentCourseData.forEach(element => {
-//             studentCourseJson.courses = element
-//             studentsJson.students = studentsData
-//             studentsJson.courses = studentCourseJson
-//         });
-
-//         // Para trazer os dados "ao contrário", ou seja, na exiibição o último elemento inserido é o primeiro a ser mostrado, pode-se usar o comando abaixo, mas o ideal é fazer direto no banco, usando a Model
-//         // studentsJson.students = studentsData.reverse()
-
-//         return studentsJson
-//     } else {
-//         return false
-//     }
-// }
+        return studentsJson
+        
+    } else {
+        return false
+    }
+}
 
 const searchStudentById = async (id) => {
     
@@ -202,6 +205,6 @@ module.exports = {
     newStudent,
     updateStudent,
     deleteStudent,
-    // listAllStudents,
+    listAllStudents,
     searchStudentById
 }
