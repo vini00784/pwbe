@@ -40,14 +40,14 @@ const newStudent = async (student) => {
             if(newStudentId > 0) {
                 let studentCourse = {} // Objeto JSON para aluno_curso
 
-                let anoMatricula = new Date().getFullYear() // Retorna o ano corrente
+                let rmYear = new Date().getFullYear() // Retorna o ano corrente
 
-                let numeroMatricula = `${newStudentId}${student.curso[0].id_curso}${anoMatricula}` // Gera a matrícula do aluno (id_aluno + id_curso + ano corrente)
+                let rmNumber = `${newStudentId}${student.curso[0].id_curso}${rmYear}` // Gera a matrícula do aluno (id_aluno + id_curso + ano corrente)
 
                 // Inserindo as chaves e os valores no objeto JSON
                 studentCourse.id_aluno = newStudentId
                 studentCourse.id_curso = student.curso[0].id_curso
-                studentCourse.matricula = numeroMatricula
+                studentCourse.matricula = rmNumber
                 studentCourse.status_aluno = 'Cursando'
 
                 // Chama a função para inserir na tbl_aluno_curso
@@ -161,17 +161,17 @@ const deleteStudent = async (id) => {
 // }
 
 const searchStudentById = async (id) => {
-    let studentJson = {}
-
-    // Import das models aluno e aluno_curso
-    const { selectStudentById } = require('../model/DAO/aluno.js')
-    const { selectStudentCourse } = require('../model/DAO/aluno_curso.js')
-
-    const studentData = await selectStudentById(id)
-
+    
     if(id != '' && id != undefined) {
         
+        // Import das models aluno e aluno_curso
+        const { selectStudentById } = require('../model/DAO/aluno.js')
+        const { selectStudentCourse } = require('../model/DAO/aluno_curso.js')
+        
+        const studentData = await selectStudentById(id)
+        
         if(studentData) {
+            let studentJson = {}
 
             // Busca os dados referentes ao curso do aluno
             const studentCourseData = await selectStudentCourse(id)
@@ -194,7 +194,7 @@ const searchStudentById = async (id) => {
 
         }
     } else {
-        return {status: 400, message: MESSAGE_ERROR.NOT_FOUND_DB}
+        return {status: 400, message: MESSAGE_ERROR.REQUIRED_ID}
     }
 }
 
@@ -202,6 +202,6 @@ module.exports = {
     newStudent,
     updateStudent,
     deleteStudent,
-    listAllStudents,
+    // listAllStudents,
     searchStudentById
 }
