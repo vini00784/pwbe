@@ -44,7 +44,7 @@ const insertStudentCourse = async (studentCourse) => {
 }
 
 
-// Função para 
+// Função para selecionar os dados do curso e do aluno em conjunto
 const selectStudentCourse = async (studentId) => {
     try {
         let sql = `select cast(tbl_curso.id as float) as id_curso, tbl_curso.nome as nome_curso, tbl_curso.sigla as sigla_curso, 
